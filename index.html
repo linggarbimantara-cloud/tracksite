@@ -10,7 +10,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ---------- Tokens: a sky from pale horizon to deep zenith ---------- */
 :root{
   --page:#F2F7FC;
   --surface:#FFFFFF;
@@ -32,8 +31,6 @@
   --r-item:12px;
   --r-field:10px;
 }
-
-/* ---------- Base ---------- */
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%}
@@ -46,8 +43,6 @@ ul{padding:0;list-style:none}
 .neg{color:var(--neg)}
 .muted{color:var(--muted);font-size:13px}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-
-/* ---------- App shell ---------- */
 .app{display:grid;grid-template-columns:252px minmax(0,1fr);min-height:100vh}
 .sidebar{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:28px;padding:24px 16px;background:var(--sky-100);border-right:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:10px;padding:0 8px;font-size:19px;font-weight:700;letter-spacing:-.02em}
@@ -65,8 +60,6 @@ ul{padding:0;list-style:none}
 .module-head{margin-bottom:24px}
 .module-head h1{font-size:28px;line-height:1.2;font-weight:700;letter-spacing:-.025em}
 .module-head p{margin-top:6px;color:var(--muted)}
-
-/* ---------- Panels and lists ---------- */
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-panel);box-shadow:var(--shadow);padding:22px}
 .panel h2{margin-bottom:16px;font-size:16px;font-weight:600;letter-spacing:-.01em}
 .list-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:10px}
@@ -75,8 +68,6 @@ ul{padding:0;list-style:none}
 .form-panel{position:sticky;top:24px}
 .empty{padding:14px 2px;color:var(--muted);font-size:14px}
 .empty-box{grid-column:1/-1;padding:22px;border:1px dashed var(--line-strong);border-radius:var(--r-item);color:var(--muted);font-size:14px;background:rgba(255,255,255,.6)}
-
-/* ---------- Forms ---------- */
 .form-stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .full{grid-column:1/-1}
 .form-grid{display:grid;gap:14px 16px;align-items:end}
@@ -108,8 +99,6 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
 .icon-btn svg{width:18px;height:18px}
 .icon-btn:hover{background:var(--accent-soft);color:var(--accent-strong)}
 .icon-btn.danger:hover{background:var(--neg-soft);color:var(--neg)}
-
-/* ---------- Finance Track ---------- */
 .summary{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);gap:16px;margin-bottom:16px}
 .stat{display:flex;flex-direction:column;gap:6px;padding:20px 22px}
 .stat .label{font-size:13.5px;font-weight:500;color:var(--muted)}
@@ -132,8 +121,6 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
 .tx-note{font-weight:400;color:var(--muted)}
 .tx-meta{display:flex;flex-wrap:wrap;gap:0 14px;font-size:13px;color:var(--muted)}
 .tx-amt{font-weight:600;white-space:nowrap}
-
-/* ---------- Task Track: the higher the priority, the deeper the blue ---------- */
 .matrix{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}
 .quad{min-height:220px;padding:18px 18px 10px;background:var(--tint);border:1px solid var(--line);border-top:5px solid var(--bar);border-radius:var(--r-panel)}
 .quad header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
@@ -150,8 +137,6 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
 .due svg{width:14px;height:14px}
 .rel{padding:1px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent-strong);font-size:12px;font-weight:600}
 .due.late .rel{background:var(--neg-soft);color:var(--neg)}
-
-/* ---------- Goal Track ---------- */
 .group{margin-top:28px}
 .group-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .group-head h2{font-size:18px;font-weight:600;letter-spacing:-.015em}
@@ -164,8 +149,6 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
 .goal-actions{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:6px}
 .goal .btn{min-height:36px;padding:0 14px;font-size:14px}
 .pill{padding:3px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent-strong);font-size:12.5px;font-weight:600;white-space:nowrap}
-
-/* ---------- Daily Runn ---------- */
 .run-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:20px}
 .run-stats .stat .value{font-size:24px}
 .run-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
@@ -176,13 +159,9 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
 .run dl{display:flex;gap:26px}
 .run dt{font-size:12.5px;color:var(--muted)}
 .run dd{font-weight:600}
-
-/* ---------- Toast ---------- */
 .toast{position:fixed;left:50%;bottom:28px;z-index:50;max-width:min(92vw,420px);padding:11px 16px;border-radius:12px;background:var(--ink);color:#fff;font-size:14px;font-weight:500;box-shadow:0 12px 30px -10px rgba(27,43,61,.55);opacity:0;pointer-events:none;transform:translate(-50%,14px);transition:opacity .2s,transform .2s}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .toast.error{background:#8F2A25}
-
-/* ---------- Responsive ---------- */
 @media (max-width:1080px){
   .split{grid-template-columns:1fr}
   .form-panel{position:static}
@@ -236,20 +215,17 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
   </aside>
 
   <main class="content">
-    <!-- Finance Track -->
     <section class="module" id="tab-finance" aria-labelledby="h-finance">
       <header class="module-head">
         <h1 id="h-finance">Finance Track</h1>
         <p>Cash flow across your accounts.</p>
       </header>
-
       <div class="summary">
         <div class="panel stat total"><span class="label">Total balance</span><span class="value num" id="f-total">Rp 0</span></div>
         <div class="panel stat"><span class="label">Income this month</span><span class="value num pos" id="f-income">Rp 0</span></div>
         <div class="panel stat"><span class="label">Expenses this month</span><span class="value num neg" id="f-expense">Rp 0</span></div>
       </div>
       <div class="panel accounts" id="f-accounts" aria-label="Balance per account"></div>
-
       <div class="split">
         <form class="panel form-panel" id="f-form">
           <h2>New transaction</h2>
@@ -275,7 +251,6 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
             <button type="button" class="btn full" data-submit>Add transaction</button>
           </div>
         </form>
-
         <div class="panel">
           <div class="list-head"><h2>Recent transactions</h2><span class="muted" id="f-count"></span></div>
           <ul id="f-list"></ul>
@@ -283,30 +258,25 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
       </div>
     </section>
 
-    <!-- Task Track -->
     <section class="module" id="tab-tasks" aria-labelledby="h-tasks" hidden>
       <header class="module-head">
         <h1 id="h-tasks">Task Track</h1>
         <p>Plan your outside commitments by urgency and importance.</p>
       </header>
-
       <form class="panel form-grid f-task" id="t-form">
         <div class="field"><label for="t-title">Task name</label><input id="t-title" type="text" maxlength="120" placeholder="What needs to be done?" autocomplete="off" required></div>
         <div class="field"><label for="t-deadline">Deadline</label><input id="t-deadline" type="date"></div>
         <div class="field"><label for="t-quad">Quadrant</label><select id="t-quad"></select></div>
         <button type="button" class="btn" data-submit>Add task</button>
       </form>
-
       <div class="matrix" id="t-matrix"></div>
     </section>
 
-    <!-- Goal Track -->
     <section class="module" id="tab-goals" aria-labelledby="h-goals" hidden>
       <header class="module-head">
         <h1 id="h-goals">Goal Track</h1>
         <p>Short-term and long-term goals in one place.</p>
       </header>
-
       <form class="panel form-grid f-goal" id="g-form">
         <div class="field"><label for="g-title">Goal title</label><input id="g-title" type="text" maxlength="100" placeholder="What do you want to achieve?" autocomplete="off" required></div>
         <div class="field"><label for="g-type">Type</label>
@@ -316,19 +286,15 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
         <div class="field wide"><label for="g-desc">Description</label><textarea id="g-desc" rows="2" maxlength="300" placeholder="Details, or how you will know it is done"></textarea></div>
         <button type="button" class="btn" data-submit>Add goal</button>
       </form>
-
       <div id="g-groups"></div>
     </section>
 
-    <!-- Daily Runn -->
     <section class="module" id="tab-runs" aria-labelledby="h-runs" hidden>
       <header class="module-head">
         <h1 id="h-runs">Daily Runn</h1>
         <p>Log each run and track your pace.</p>
       </header>
-
       <div class="run-stats" id="r-stats"></div>
-
       <div class="split">
         <form class="panel form-panel" id="r-form">
           <h2>New run</h2>
@@ -341,7 +307,6 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
             <button type="button" class="btn full" data-submit>Add run</button>
           </div>
         </form>
-
         <div>
           <div class="list-head"><h2>Run history</h2><span class="muted" id="r-count"></span></div>
           <div class="run-grid" id="r-list"></div>
@@ -354,463 +319,469 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <noscript><p style="padding:24px">TrackSite needs JavaScript to run.</p></noscript>
 
-<script>
-(() => {
-  'use strict';
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-  /* ---------- Constants ---------- */
-  const KEY = 'tracksite:v1';
-  const TABS = ['finance', 'tasks', 'goals', 'runs'];
-  const TAB_TITLES = { finance: 'Finance Track', tasks: 'Task Track', goals: 'Goal Track', runs: 'Daily Runn' };
-  const ACCOUNTS = ['Cash', 'Bank BRI', 'Bank Jatim', 'SeaBank', 'GoPay'];
-  const CATEGORIES = {
-    income: ['Allowance', 'Salary', 'Freelance', 'Gift', 'Refund', 'Opening balance', 'Other'],
-    expense: ['Food & drink', 'Transport', 'Education', 'Bills & data', 'Entertainment', 'Health & sport', 'Shopping', 'Other'],
-    transfer: ['Top-up', 'Withdrawal', 'Savings', 'Other']
-  };
-  const QUADS = [
-    { id: 'q1', title: 'Urgent & Important', hint: 'Do these first', bar: '#2F6FB5', tint: '#E6F0FA' },
-    { id: 'q2', title: 'Important & Not Urgent', hint: 'Schedule time for these', bar: '#5B9BD8', tint: '#EDF5FC' },
-    { id: 'q3', title: 'Urgent & Not Important', hint: 'Keep these short or hand them off', bar: '#8DBBE6', tint: '#F3F8FD' },
-    { id: 'q4', title: 'Neither', hint: 'Drop or postpone', bar: '#B7C9DA', tint: '#F7F9FB' }
-  ];
-  const TIMEFRAMES = ['Today', 'Tomorrow', '1 Week', '1 Month', 'Quarterly', 'Semester', '1 Year'];
-  const REMOVERS = {
-    'del-tx': ['finance', 'Transaction deleted'],
-    'del-task': ['tasks', 'Task deleted'],
-    'del-goal': ['goals', 'Goal deleted'],
-    'del-run': ['runs', 'Run deleted']
-  };
-  const ICONS = {
-    cloud: '<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>',
-    cash: '<rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v.01M18 14.5v.01"/>',
-    grid: '<rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="2"/><rect x="13" y="13" width="7.5" height="7.5" rx="2"/>',
-    target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r=".6"/>',
-    route: '<circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h8.5a3.5 3.5 0 0 0 0-7h-9a3.5 3.5 0 0 1 0-7H16"/>',
-    down: '<path d="M12 5v14M6 13l6 6 6-6"/>',
-    up: '<path d="M12 19V5M6 11l6-6 6 6"/>',
-    swap: '<path d="M4 8h15M15 4l4 4-4 4M20 16H5M9 12l-4 4 4 4"/>',
-    x: '<path d="M6 6l12 12M18 6L6 18"/>',
-    check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
-    calendar: '<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/>'
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyBm2qs6uhhG7s3tfnUqrVDK2bXbXj7FeEY",
+  authDomain: "tracksite-d1da4.firebaseapp.com",
+  projectId: "tracksite-d1da4",
+  storageBucket: "tracksite-d1da4.firebasestorage.app",
+  messagingSenderId: "496127204075",
+  appId: "1:496127204075:web:28023608df38f9bb843cae"
+};
 
-  /* ---------- Helpers ---------- */
-  const $ = (sel, root = document) => root.querySelector(sel);
-  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-  const pad = n => String(n).padStart(2, '0');
-  const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
-  const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const icon = name => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[name] + '</svg>';
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-  const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
-  const todayStr = () => { const d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); };
-  const toDate = s => { const p = s.split('-').map(Number); return new Date(p[0], p[1] - 1, p[2]); };
-  const fmtDate = s => DATE_RE.test(s || '') ? toDate(s).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
-  const fmtDay = s => DATE_RE.test(s || '') ? toDate(s).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }) : '';
-  const daysFrom = s => Math.round((toDate(s) - toDate(todayStr())) / 864e5);
+const TABS = ['finance', 'tasks', 'goals', 'runs'];
+const TAB_TITLES = { finance: 'Finance Track', tasks: 'Task Track', goals: 'Goal Track', runs: 'Daily Runn' };
+const ACCOUNTS = ['Cash', 'Bank BRI', 'Bank Jatim', 'SeaBank', 'GoPay'];
+const CATEGORIES = {
+  income: ['Allowance', 'Salary', 'Freelance', 'Gift', 'Refund', 'Opening balance', 'Other'],
+  expense: ['Food & drink', 'Transport', 'Education', 'Bills & data', 'Entertainment', 'Health & sport', 'Shopping', 'Other'],
+  transfer: ['Top-up', 'Withdrawal', 'Savings', 'Other']
+};
+const QUADS = [
+  { id: 'q1', title: 'Urgent & Important', hint: 'Do these first', bar: '#2F6FB5', tint: '#E6F0FA' },
+  { id: 'q2', title: 'Important & Not Urgent', hint: 'Schedule time for these', bar: '#5B9BD8', tint: '#EDF5FC' },
+  { id: 'q3', title: 'Urgent & Not Important', hint: 'Keep these short or hand them off', bar: '#8DBBE6', tint: '#F3F8FD' },
+  { id: 'q4', title: 'Neither', hint: 'Drop or postpone', bar: '#B7C9DA', tint: '#F7F9FB' }
+];
+const TIMEFRAMES = ['Today', 'Tomorrow', '1 Week', '1 Month', 'Quarterly', 'Semester', '1 Year'];
+const ICONS = {
+  cloud: '<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>',
+  cash: '<rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v.01M18 14.5v.01"/>',
+  grid: '<rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="2"/><rect x="13" y="13" width="7.5" height="7.5" rx="2"/>',
+  target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r=".6"/>',
+  route: '<circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h8.5a3.5 3.5 0 0 0 0-7h-9a3.5 3.5 0 0 1 0-7H16"/>',
+  down: '<path d="M12 5v14M6 13l6 6 6-6"/>',
+  up: '<path d="M12 19V5M6 11l6-6 6 6"/>',
+  swap: '<path d="M4 8h15M15 4l4 4-4 4M20 16H5M9 12l-4 4 4 4"/>',
+  x: '<path d="M6 6l12 12M18 6L6 18"/>',
+  check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  calendar: '<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/>'
+};
 
-  const IDR = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 });
-  const money = n => IDR.format(n || 0);
-  const km = n => String(+Number(n || 0).toFixed(2));
-  const clock = sec => {
-    sec = Math.round(sec || 0);
-    const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
-    return h ? h + ':' + pad(m) + ':' + pad(s) : m + ':' + pad(s);
-  };
-  // "18:22", "1:05:30" or a plain number of minutes -> seconds. Empty -> null, invalid -> NaN.
-  const parseClock = v => {
-    v = String(v || '').trim().replace(',', '.');
-    if (!v) return null;
-    if (/^\d+(\.\d+)?$/.test(v)) return Math.round(parseFloat(v) * 60);
-    const m = v.match(/^(\d+):([0-5]?\d)(?::([0-5]?\d))?$/);
-    if (!m) return NaN;
-    return m[3] === undefined ? (+m[1]) * 60 + (+m[2]) : (+m[1]) * 3600 + (+m[2]) * 60 + (+m[3]);
-  };
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const pad = n => String(n).padStart(2, '0');
+const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const icon = name => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[name] + '</svg>';
 
-  const dn = x => (x && x.done ? 1 : 0);
-  const sortByDate = (a, b) => String(b.date || '').localeCompare(String(a.date || '')) || (b.ts || 0) - (a.ts || 0);
-  const taskSort = (a, b) => dn(a) - dn(b) || String(a.deadline || '9999-99-99').localeCompare(String(b.deadline || '9999-99-99')) || (a.ts || 0) - (b.ts || 0);
-  const goalSort = (a, b) => dn(a) - dn(b) || (a.ts || 0) - (b.ts || 0);
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+const todayStr = () => { const d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); };
+const toDate = s => { const p = s.split('-').map(Number); return new Date(p[0], p[1] - 1, p[2]); };
+const fmtDate = s => DATE_RE.test(s || '') ? toDate(s).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+const fmtDay = s => DATE_RE.test(s || '') ? toDate(s).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }) : '';
+const daysFrom = s => Math.round((toDate(s) - toDate(todayStr())) / 864e5);
 
-  /* ---------- State and storage ---------- */
-  let state, storageOk = true, fresh = false, paceManual = false, toastTimer;
+const IDR = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 });
+const money = n => IDR.format(n || 0);
+const km = n => String(+Number(n || 0).toFixed(2));
+const clock = sec => {
+  sec = Math.round(sec || 0);
+  const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+  return h ? h + ':' + pad(m) + ':' + pad(s) : m + ':' + pad(s);
+};
+const parseClock = v => {
+  v = String(v || '').trim().replace(',', '.');
+  if (!v) return null;
+  if (/^\d+(\.\d+)?$/.test(v)) return Math.round(parseFloat(v) * 60);
+  const m = v.match(/^(\d+):([0-5]?\d)(?::([0-5]?\d))?$/);
+  if (!m) return NaN;
+  return m[3] === undefined ? (+m[1]) * 60 + (+m[2]) : (+m[1]) * 3600 + (+m[2]) * 60 + (+m[3]);
+};
 
-  const seed = () => ({
-    finance: [],
-    tasks: [],
-    goals: [{
-      id: uid(), title: 'SNBT Preparation - S1 Akuntansi UGM', type: 'long', timeframe: 'Semester',
-      desc: 'Prepare for the SNBT and get into the S1 Accounting program at Universitas Gadjah Mada (UGM).',
-      done: false, ts: Date.now()
-    }],
-    runs: [{ id: uid(), date: todayStr(), distance: 2.33, duration: 1102, pace: 473, ts: Date.now() }],
-    tab: 'finance'
-  });
+const dn = x => (x && x.done ? 1 : 0);
+const sortByDate = (a, b) => String(b.date || '').localeCompare(String(a.date || '')) || (b.ts || 0) - (a.ts || 0);
+const taskSort = (a, b) => dn(a) - dn(b) || String(a.deadline || '9999-99-99').localeCompare(String(b.deadline || '9999-99-99')) || (a.ts || 0) - (b.ts || 0);
+const goalSort = (a, b) => dn(a) - dn(b) || (a.ts || 0) - (b.ts || 0);
 
-  function load() {
-    try {
-      const raw = localStorage.getItem(KEY);
-      if (raw) {
-        try {
-          const p = JSON.parse(raw);
-          const list = v => Array.isArray(v) ? v.filter(x => x && typeof x === 'object' && x.id) : [];
-          return { finance: list(p.finance), tasks: list(p.tasks), goals: list(p.goals), runs: list(p.runs), tab: TABS.includes(p.tab) ? p.tab : 'finance' };
-        } catch (parseError) {
-          try { localStorage.setItem(KEY + ':corrupt', raw); } catch (_) { /* keep going */ }
-        }
-      }
-    } catch (e) {
-      storageOk = false;
-    }
-    fresh = true;
-    return seed();
-  }
+let state, paceManual = false, toastTimer;
 
-  function save() {
-    try { localStorage.setItem(KEY, JSON.stringify(state)); storageOk = true; }
-    catch (e) { storageOk = false; }
-    renderStorageNote();
-  }
-
-  function commit(message) {
-    save();
-    renderAll();
-    if (message) toast(message);
-  }
-
-  function toast(message, kind) {
-    const el = $('#toast');
-    el.textContent = message;
-    el.className = 'toast show' + (kind === 'error' ? ' error' : '');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove('show'), 2800);
-  }
-
-  /* ---------- Navigation ---------- */
-  function setTab(tab, persist) {
-    if (!TABS.includes(tab)) tab = 'finance';
-    state.tab = tab;
-    $$('.module').forEach(m => { m.hidden = m.id !== 'tab-' + tab; });
-    $$('.nav button').forEach(b => {
-      const on = b.dataset.tab === tab;
-      b.classList.toggle('active', on);
-      if (on) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
-    });
-    document.title = TAB_TITLES[tab] + ' | TrackSite';
-    if (persist) save();
-  }
-
-  /* ---------- Rendering ---------- */
-  function renderStorageNote() {
-    const el = $('#storage-note');
-    el.textContent = storageOk ? 'Saved in this browser.' : 'Browser storage is blocked. Changes will be lost when you close this page.';
-    el.classList.toggle('warn', !storageOk);
-  }
-
-  function balances() {
-    const b = {};
-    ACCOUNTS.forEach(a => { b[a] = 0; });
-    state.finance.forEach(t => {
-      const amt = Number(t.amount) || 0;
-      if (t.type === 'income') b[t.account] = (b[t.account] || 0) + amt;
-      else if (t.type === 'expense') b[t.account] = (b[t.account] || 0) - amt;
-      else if (t.type === 'transfer') {
-        b[t.account] = (b[t.account] || 0) - amt;
-        if (t.to) b[t.to] = (b[t.to] || 0) + amt;
-      }
-    });
-    return b;
-  }
-
-  function txRow(t) {
-    const amt = Number(t.amount) || 0;
-    const sign = t.type === 'income' ? '+' : t.type === 'expense' ? '\u2212' : '';
-    const cls = t.type === 'income' ? 'pos' : t.type === 'expense' ? 'neg' : '';
-    const kind = ['income', 'expense', 'transfer'].includes(t.type) ? t.type : 'transfer';
-    const where = kind === 'transfer' ? esc(t.account) + ' to ' + esc(t.to) : esc(t.account);
-    const glyph = { income: 'down', expense: 'up', transfer: 'swap' }[kind];
-    return '<li class="tx">' +
-      '<span class="tx-ico ' + kind + '">' + icon(glyph) + '</span>' +
-      '<div class="tx-main">' +
-        '<div class="tx-title">' + esc(t.category) + (t.note ? ' <span class="tx-note">' + esc(t.note) + '</span>' : '') + '</div>' +
-        '<div class="tx-meta"><span>' + where + '</span><span>' + fmtDate(t.date) + '</span></div>' +
-      '</div>' +
-      '<div class="tx-amt num ' + cls + '">' + sign + money(amt) + '</div>' +
-      '<button type="button" class="icon-btn danger" data-action="del-tx" data-id="' + esc(t.id) + '" aria-label="Delete transaction">' + icon('x') + '</button>' +
-    '</li>';
-  }
-
-  function renderFinance() {
-    const b = balances();
-    const total = Object.keys(b).reduce((s, k) => s + b[k], 0);
-    const month = todayStr().slice(0, 7);
-    let inc = 0, exp = 0;
-    state.finance.forEach(t => {
-      if (!t.date || t.date.slice(0, 7) !== month || t.category === 'Opening balance') return;
-      const a = Number(t.amount) || 0;
-      if (t.type === 'income') inc += a; else if (t.type === 'expense') exp += a;
-    });
-    $('#f-total').textContent = money(total);
-    $('#f-total').classList.toggle('neg', total < 0);
-    $('#f-income').textContent = money(inc);
-    $('#f-expense').textContent = money(exp);
-    $('#f-accounts').innerHTML = ACCOUNTS.map(a =>
-      '<div class="acct"><span>' + esc(a) + '</span><strong class="num' + (b[a] < 0 ? ' neg' : '') + '">' + money(b[a]) + '</strong></div>'
-    ).join('');
-    const rows = state.finance.slice().sort(sortByDate);
-    $('#f-count').textContent = rows.length > 50 ? 'Latest 50 of ' + rows.length : '';
-    $('#f-list').innerHTML = rows.length
-      ? rows.slice(0, 50).map(txRow).join('')
-      : '<li class="empty">No transactions yet. Add your first one with the form.</li>';
-  }
-
-  function taskRow(t) {
-    let due = '';
-    if (DATE_RE.test(t.deadline || '')) {
-      const n = daysFrom(t.deadline);
-      const late = !t.done && n < 0;
-      let rel = '';
-      if (!t.done) rel = n < 0 ? (-n) + (n === -1 ? ' day overdue' : ' days overdue') : n === 0 ? 'Today' : n === 1 ? 'Tomorrow' : 'In ' + n + ' days';
-      due = '<div class="due' + (late ? ' late' : '') + '">' + icon('calendar') + '<span>' + fmtDate(t.deadline) + '</span>' + (rel ? '<span class="rel">' + rel + '</span>' : '') + '</div>';
-    }
-    return '<li class="task' + (t.done ? ' done' : '') + '">' +
-      '<button type="button" class="check" data-action="toggle-task" data-id="' + esc(t.id) + '" aria-pressed="' + (t.done ? 'true' : 'false') + '" aria-label="' + (t.done ? 'Reopen task' : 'Mark task as done') + '">' + icon('check') + '</button>' +
-      '<div><div class="task-title">' + esc(t.title) + '</div>' + due + '</div>' +
-      '<button type="button" class="icon-btn danger" data-action="del-task" data-id="' + esc(t.id) + '" aria-label="Delete task">' + icon('x') + '</button>' +
-    '</li>';
-  }
-
-  function renderTasks() {
-    $('#t-matrix').innerHTML = QUADS.map(q => {
-      const items = state.tasks.filter(t => t.quad === q.id).sort(taskSort);
-      const open = items.filter(t => !t.done).length;
-      return '<section class="quad" style="--bar:' + q.bar + ';--tint:' + q.tint + '" aria-label="' + esc(q.title) + '">' +
-        '<header><div><h2>' + esc(q.title) + '</h2><p>' + esc(q.hint) + '</p></div><span class="count" title="Open tasks">' + open + '</span></header>' +
-        '<ul>' + (items.length ? items.map(taskRow).join('') : '<li class="empty">No tasks yet. Add one above.</li>') + '</ul>' +
-      '</section>';
-    }).join('');
-  }
-
-  function goalCard(g) {
-    return '<article class="goal' + (g.done ? ' done' : '') + '">' +
-      '<div class="goal-top"><h3>' + esc(g.title) + '</h3><span class="pill">' + esc(g.timeframe) + '</span></div>' +
-      (g.desc ? '<p>' + esc(g.desc) + '</p>' : '') +
-      '<div class="goal-actions">' +
-        '<button type="button" class="btn btn-quiet" data-action="toggle-goal" data-id="' + esc(g.id) + '">' + (g.done ? 'Reopen' : 'Mark as done') + '</button>' +
-        '<button type="button" class="icon-btn danger" data-action="del-goal" data-id="' + esc(g.id) + '" aria-label="Delete goal">' + icon('x') + '</button>' +
-      '</div>' +
-    '</article>';
-  }
-
-  function renderGoals() {
-    const groups = [
-      ['short', 'Short-term goals', 'No short-term goals yet. Add one with the form above.'],
-      ['long', 'Long-term goals', 'No long-term goals yet. Add one with the form above.']
-    ];
-    $('#g-groups').innerHTML = groups.map(g => {
-      const items = state.goals.filter(x => x.type === g[0]).sort(goalSort);
-      return '<section class="group" aria-label="' + g[1] + '">' +
-        '<div class="group-head"><h2>' + g[1] + '</h2><span class="count">' + items.length + '</span></div>' +
-        (items.length ? '<div class="goal-grid">' + items.map(goalCard).join('') + '</div>' : '<p class="empty-box">' + g[2] + '</p>') +
-      '</section>';
-    }).join('');
-  }
-
-  function runCard(r) {
-    return '<article class="run">' +
-      '<div class="run-head"><span>' + fmtDay(r.date) + '</span><button type="button" class="icon-btn danger" data-action="del-run" data-id="' + esc(r.id) + '" aria-label="Delete run">' + icon('x') + '</button></div>' +
-      '<div class="run-dist num">' + km(r.distance) + '<small>km</small></div>' +
-      '<dl><div><dt>Duration</dt><dd class="num">' + clock(r.duration) + '</dd></div><div><dt>Pace</dt><dd class="num">' + clock(r.pace) + ' /km</dd></div></dl>' +
-    '</article>';
-  }
-
-  function renderRuns() {
-    const runs = state.runs.slice().sort(sortByDate);
-    const dist = runs.reduce((s, r) => s + (Number(r.distance) || 0), 0);
-    const time = runs.reduce((s, r) => s + (Number(r.duration) || 0), 0);
-    const longest = runs.reduce((m, r) => Math.max(m, Number(r.distance) || 0), 0);
-    const stats = [
-      ['Total distance', km(dist) + ' km'],
-      ['Runs', String(runs.length)],
-      ['Average pace', dist && time ? clock(time / dist) + ' /km' : 'No data yet'],
-      ['Longest run', longest ? km(longest) + ' km' : 'No data yet']
-    ];
-    $('#r-stats').innerHTML = stats.map(s => '<div class="panel stat"><span class="label">' + s[0] + '</span><span class="value num">' + s[1] + '</span></div>').join('');
-    $('#r-count').textContent = runs.length ? runs.length + (runs.length === 1 ? ' run' : ' runs') : '';
-    $('#r-list').innerHTML = runs.length ? runs.map(runCard).join('') : '<p class="empty-box">No runs yet. Log your first run with the form.</p>';
-  }
-
-  function renderAll() {
-    renderFinance();
+function listenToTasks() {
+  onSnapshot(collection(db, "tasks"), (snapshot) => {
+    state.tasks = [];
+    snapshot.forEach((doc) => state.tasks.push({ id: doc.id, ...doc.data() }));
     renderTasks();
+  });
+}
+function listenToFinance() {
+  onSnapshot(collection(db, "finance"), (snapshot) => {
+    state.finance = [];
+    snapshot.forEach((doc) => state.finance.push({ id: doc.id, ...doc.data() }));
+    renderFinance();
+  });
+}
+function listenToGoals() {
+  onSnapshot(collection(db, "goals"), (snapshot) => {
+    state.goals = [];
+    snapshot.forEach((doc) => state.goals.push({ id: doc.id, ...doc.data() }));
     renderGoals();
+  });
+}
+function listenToRuns() {
+  onSnapshot(collection(db, "runs"), (snapshot) => {
+    state.runs = [];
+    snapshot.forEach((doc) => state.runs.push({ id: doc.id, ...doc.data() }));
     renderRuns();
-  }
+  });
+}
 
-  /* ---------- Form logic ---------- */
-  function fill(select, items) {
-    select.innerHTML = items.map(i => Array.isArray(i)
-      ? '<option value="' + esc(i[0]) + '">' + esc(i[1]) + '</option>'
-      : '<option value="' + esc(i) + '">' + esc(i) + '</option>').join('');
-  }
+function toast(message, kind) {
+  const el = $('#toast');
+  el.textContent = message;
+  el.className = 'toast show' + (kind === 'error' ? ' error' : '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2800);
+}
 
-  function syncFinanceForm() {
-    const type = $('input[name="ftype"]:checked').value;
-    const sel = $('#f-category');
-    const prev = sel.value;
-    fill(sel, CATEGORIES[type]);
-    if (CATEGORIES[type].includes(prev)) sel.value = prev;
-    $('#f-to-wrap').hidden = type !== 'transfer';
-    $('#f-account-label').textContent = type === 'transfer' ? 'From account' : 'Account';
-    if (type === 'transfer' && $('#f-to').value === $('#f-account').value) {
-      const other = ACCOUNTS.find(a => a !== $('#f-account').value);
-      if (other) $('#f-to').value = other;
+function setTab(tab) {
+  if (!TABS.includes(tab)) tab = 'finance';
+  state.tab = tab;
+  $$('.module').forEach(m => { m.hidden = m.id !== 'tab-' + tab; });
+  $$('.nav button').forEach(b => {
+    const on = b.dataset.tab === tab;
+    b.classList.toggle('active', on);
+    if (on) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
+  });
+  document.title = TAB_TITLES[tab] + ' | TrackSite';
+}
+
+function balances() {
+  const b = {};
+  ACCOUNTS.forEach(a => { b[a] = 0; });
+  state.finance.forEach(t => {
+    const amt = Number(t.amount) || 0;
+    if (t.type === 'income') b[t.account] = (b[t.account] || 0) + amt;
+    else if (t.type === 'expense') b[t.account] = (b[t.account] || 0) - amt;
+    else if (t.type === 'transfer') {
+      b[t.account] = (b[t.account] || 0) - amt;
+      if (t.to) b[t.to] = (b[t.to] || 0) + amt;
     }
-  }
+  });
+  return b;
+}
 
-  function addTransaction() {
-    if (!$('#f-form').reportValidity()) return;
-    const type = $('input[name="ftype"]:checked').value;
-    const amount = Math.round(parseFloat($('#f-amount').value));
-    if (!(amount > 0)) return toast('Enter an amount greater than 0.', 'error');
-    const account = $('#f-account').value;
-    const to = type === 'transfer' ? $('#f-to').value : '';
-    if (type === 'transfer' && to === account) return toast('Choose two different accounts for a transfer.', 'error');
-    state.finance.push({
-      id: uid(), type, amount, category: $('#f-category').value, account, to,
+function txRow(t) {
+  const amt = Number(t.amount) || 0;
+  const sign = t.type === 'income' ? '+' : t.type === 'expense' ? '\u2212' : '';
+  const cls = t.type === 'income' ? 'pos' : t.type === 'expense' ? 'neg' : '';
+  const kind = ['income', 'expense', 'transfer'].includes(t.type) ? t.type : 'transfer';
+  const where = kind === 'transfer' ? esc(t.account) + ' to ' + esc(t.to) : esc(t.account);
+  const glyph = { income: 'down', expense: 'up', transfer: 'swap' }[kind];
+  return '<li class="tx">' +
+    '<span class="tx-ico ' + kind + '">' + icon(glyph) + '</span>' +
+    '<div class="tx-main">' +
+      '<div class="tx-title">' + esc(t.category) + (t.note ? ' <span class="tx-note">' + esc(t.note) + '</span>' : '') + '</div>' +
+      '<div class="tx-meta"><span>' + where + '</span><span>' + fmtDate(t.date) + '</span></div>' +
+    '</div>' +
+    '<div class="tx-amt num ' + cls + '">' + sign + money(amt) + '</div>' +
+    '<button type="button" class="icon-btn danger" data-action="del-tx" data-id="' + esc(t.id) + '" aria-label="Delete transaction">' + icon('x') + '</button>' +
+  '</li>';
+}
+
+function renderFinance() {
+  const b = balances();
+  const total = Object.keys(b).reduce((s, k) => s + b[k], 0);
+  const month = todayStr().slice(0, 7);
+  let inc = 0, exp = 0;
+  state.finance.forEach(t => {
+    if (!t.date || t.date.slice(0, 7) !== month || t.category === 'Opening balance') return;
+    const a = Number(t.amount) || 0;
+    if (t.type === 'income') inc += a; else if (t.type === 'expense') exp += a;
+  });
+  $('#f-total').textContent = money(total);
+  $('#f-total').classList.toggle('neg', total < 0);
+  $('#f-income').textContent = money(inc);
+  $('#f-expense').textContent = money(exp);
+  $('#f-accounts').innerHTML = ACCOUNTS.map(a =>
+    '<div class="acct"><span>' + esc(a) + '</span><strong class="num' + (b[a] < 0 ? ' neg' : '') + '">' + money(b[a]) + '</strong></div>'
+  ).join('');
+  const rows = state.finance.slice().sort(sortByDate);
+  $('#f-count').textContent = rows.length > 50 ? 'Latest 50 of ' + rows.length : '';
+  $('#f-list').innerHTML = rows.length
+    ? rows.slice(0, 50).map(txRow).join('')
+    : '<li class="empty">No transactions yet. Add your first one with the form.</li>';
+}
+
+function taskRow(t) {
+  let due = '';
+  if (DATE_RE.test(t.deadline || '')) {
+    const n = daysFrom(t.deadline);
+    const late = !t.done && n < 0;
+    let rel = '';
+    if (!t.done) rel = n < 0 ? (-n) + (n === -1 ? ' day overdue' : ' days overdue') : n === 0 ? 'Today' : n === 1 ? 'Tomorrow' : 'In ' + n + ' days';
+    due = '<div class="due' + (late ? ' late' : '') + '">' + icon('calendar') + '<span>' + fmtDate(t.deadline) + '</span>' + (rel ? '<span class="rel">' + rel + '</span>' : '') + '</div>';
+  }
+  return '<li class="task' + (t.done ? ' done' : '') + '">' +
+    '<button type="button" class="check" data-action="toggle-task" data-id="' + esc(t.id) + '" aria-pressed="' + (t.done ? 'true' : 'false') + '" aria-label="' + (t.done ? 'Reopen task' : 'Mark task as done') + '">' + icon('check') + '</button>' +
+    '<div><div class="task-title">' + esc(t.title) + '</div>' + due + '</div>' +
+    '<button type="button" class="icon-btn danger" data-action="del-task" data-id="' + esc(t.id) + '" aria-label="Delete task">' + icon('x') + '</button>' +
+  '</li>';
+}
+
+function renderTasks() {
+  $('#t-matrix').innerHTML = QUADS.map(q => {
+    const items = state.tasks.filter(t => t.quad === q.id).sort(taskSort);
+    const open = items.filter(t => !t.done).length;
+    return '<section class="quad" style="--bar:' + q.bar + ';--tint:' + q.tint + '" aria-label="' + esc(q.title) + '">' +
+      '<header><div><h2>' + esc(q.title) + '</h2><p>' + esc(q.hint) + '</p></div><span class="count" title="Open tasks">' + open + '</span></header>' +
+      '<ul>' + (items.length ? items.map(taskRow).join('') : '<li class="empty">No tasks yet. Add one above.</li>') + '</ul>' +
+    '</section>';
+  }).join('');
+}
+
+function goalCard(g) {
+  return '<article class="goal' + (g.done ? ' done' : '') + '">' +
+    '<div class="goal-top"><h3>' + esc(g.title) + '</h3><span class="pill">' + esc(g.timeframe) + '</span></div>' +
+    (g.desc ? '<p>' + esc(g.desc) + '</p>' : '') +
+    '<div class="goal-actions">' +
+      '<button type="button" class="btn btn-quiet" data-action="toggle-goal" data-id="' + esc(g.id) + '">' + (g.done ? 'Reopen' : 'Mark as done') + '</button>' +
+      '<button type="button" class="icon-btn danger" data-action="del-goal" data-id="' + esc(g.id) + '" aria-label="Delete goal">' + icon('x') + '</button>' +
+    '</div>' +
+  '</article>';
+}
+
+function renderGoals() {
+  const groups = [
+    ['short', 'Short-term goals', 'No short-term goals yet. Add one with the form above.'],
+    ['long', 'Long-term goals', 'No long-term goals yet. Add one with the form above.']
+  ];
+  $('#g-groups').innerHTML = groups.map(g => {
+    const items = state.goals.filter(x => x.type === g[0]).sort(goalSort);
+    return '<section class="group" aria-label="' + g[1] + '">' +
+      '<div class="group-head"><h2>' + g[1] + '</h2><span class="count">' + items.length + '</span></div>' +
+      (items.length ? '<div class="goal-grid">' + items.map(goalCard).join('') + '</div>' : '<p class="empty-box">' + g[2] + '</p>') +
+    '</section>';
+  }).join('');
+}
+
+function runCard(r) {
+  return '<article class="run">' +
+    '<div class="run-head"><span>' + fmtDay(r.date) + '</span><button type="button" class="icon-btn danger" data-action="del-run" data-id="' + esc(r.id) + '" aria-label="Delete run">' + icon('x') + '</button></div>' +
+    '<div class="run-dist num">' + km(r.distance) + '<small>km</small></div>' +
+    '<dl><div><dt>Duration</dt><dd class="num">' + clock(r.duration) + '</dd></div><div><dt>Pace</dt><dd class="num">' + clock(r.pace) + ' /km</dd></div></dl>' +
+  '</article>';
+}
+
+function renderRuns() {
+  const runs = state.runs.slice().sort(sortByDate);
+  const dist = runs.reduce((s, r) => s + (Number(r.distance) || 0), 0);
+  const time = runs.reduce((s, r) => s + (Number(r.duration) || 0), 0);
+  const longest = runs.reduce((m, r) => Math.max(m, Number(r.distance) || 0), 0);
+  const stats = [
+    ['Total distance', km(dist) + ' km'],
+    ['Runs', String(runs.length)],
+    ['Average pace', dist && time ? clock(time / dist) + ' /km' : 'No data yet'],
+    ['Longest run', longest ? km(longest) + ' km' : 'No data yet']
+  ];
+  $('#r-stats').innerHTML = stats.map(s => '<div class="panel stat"><span class="label">' + s[0] + '</span><span class="value num">' + s[1] + '</span></div>').join('');
+  $('#r-count').textContent = runs.length ? runs.length + (runs.length === 1 ? ' run' : ' runs') : '';
+  $('#r-list').innerHTML = runs.length ? runs.map(runCard).join('') : '<p class="empty-box">No runs yet. Log your first run with the form.</p>';
+}
+
+function renderAll() {
+  renderFinance();
+  renderTasks();
+  renderGoals();
+  renderRuns();
+}
+
+function fill(select, items) {
+  select.innerHTML = items.map(i => Array.isArray(i)
+    ? '<option value="' + esc(i[0]) + '">' + esc(i[1]) + '</option>'
+    : '<option value="' + esc(i) + '">' + esc(i) + '</option>').join('');
+}
+
+function syncFinanceForm() {
+  const type = $('input[name="ftype"]:checked').value;
+  const sel = $('#f-category');
+  const prev = sel.value;
+  fill(sel, CATEGORIES[type]);
+  if (CATEGORIES[type].includes(prev)) sel.value = prev;
+  $('#f-to-wrap').hidden = type !== 'transfer';
+  $('#f-account-label').textContent = type === 'transfer' ? 'From account' : 'Account';
+  if (type === 'transfer' && $('#f-to').value === $('#f-account').value) {
+    const other = ACCOUNTS.find(a => a !== $('#f-account').value);
+    if (other) $('#f-to').value = other;
+  }
+}
+
+async function addTransaction() {
+  if (!$('#f-form').reportValidity()) return;
+  const type = $('input[name="ftype"]:checked').value;
+  const amount = Math.round(parseFloat($('#f-amount').value));
+  if (!(amount > 0)) return toast('Enter an amount greater than 0.', 'error');
+  const account = $('#f-account').value;
+  const to = type === 'transfer' ? $('#f-to').value : '';
+  if (type === 'transfer' && to === account) return toast('Choose two different accounts for a transfer.', 'error');
+  
+  try {
+    await addDoc(collection(db, "finance"), {
+      type, amount, category: $('#f-category').value, account, to,
       date: $('#f-date').value || todayStr(), note: $('#f-note').value.trim(), ts: Date.now()
     });
     $('#f-amount').value = '';
     $('#f-note').value = '';
     $('#f-amount-hint').textContent = '';
-    commit('Transaction added');
-  }
+  } catch (e) { toast('Error saving to cloud', 'error'); }
+}
 
-  function addTask() {
-    if (!$('#t-form').reportValidity()) return;
-    const title = $('#t-title').value.trim();
-    if (!title) return toast('Enter a task name.', 'error');
-    state.tasks.push({ id: uid(), title, deadline: $('#t-deadline').value, quad: $('#t-quad').value, done: false, ts: Date.now() });
+async function addTask() {
+  if (!$('#t-form').reportValidity()) return;
+  const title = $('#t-title').value.trim();
+  if (!title) return toast('Enter a task name.', 'error');
+
+  try {
+    await addDoc(collection(db, "tasks"), {
+      title: title,
+      deadline: $('#t-deadline').value,
+      quad: $('#t-quad').value,
+      done: false,
+      ts: Date.now()
+    });
     $('#t-title').value = '';
     $('#t-deadline').value = '';
-    commit('Task added');
-  }
+    toast('Task added to Cloud!');
+  } catch (e) { toast('Error saving to cloud', 'error'); }
+}
 
-  function addGoal() {
-    if (!$('#g-form').reportValidity()) return;
-    const title = $('#g-title').value.trim();
-    if (!title) return toast('Enter a goal title.', 'error');
-    state.goals.push({ id: uid(), title, type: $('#g-type').value, timeframe: $('#g-time').value, desc: $('#g-desc').value.trim(), done: false, ts: Date.now() });
+async function addGoal() {
+  if (!$('#g-form').reportValidity()) return;
+  const title = $('#g-title').value.trim();
+  if (!title) return toast('Enter a goal title.', 'error');
+  
+  try {
+    await addDoc(collection(db, "goals"), {
+      title, type: $('#g-type').value, timeframe: $('#g-time').value, desc: $('#g-desc').value.trim(), done: false, ts: Date.now()
+    });
     $('#g-title').value = '';
     $('#g-desc').value = '';
-    commit('Goal added');
-  }
+  } catch (e) { toast('Error saving to cloud', 'error'); }
+}
 
-  function autoPace() {
-    if (paceManual) return;
-    const d = parseFloat($('#r-dist').value);
-    const t = parseClock($('#r-dur').value);
-    $('#r-pace').value = d > 0 && t > 0 ? clock(t / d) : '';
-  }
+function autoPace() {
+  if (paceManual) return;
+  const d = parseFloat($('#r-dist').value);
+  const t = parseClock($('#r-dur').value);
+  $('#r-pace').value = d > 0 && t > 0 ? clock(t / d) : '';
+}
 
-  function addRun() {
-    if (!$('#r-form').reportValidity()) return;
-    const distance = Math.round(parseFloat($('#r-dist').value) * 100) / 100;
-    if (!(distance > 0)) return toast('Enter a distance greater than 0.', 'error');
-    let dur = parseClock($('#r-dur').value);
-    let pace = parseClock($('#r-pace').value);
-    if (Number.isNaN(dur) || Number.isNaN(pace)) return toast('Use mm:ss or h:mm:ss for duration, and m:ss for pace.', 'error');
-    if (dur === null && pace === null) return toast('Enter a duration or a pace.', 'error');
-    if ((dur !== null && dur <= 0) || (pace !== null && pace <= 0)) return toast('Duration and pace must be greater than 0.', 'error');
-    if (pace === null) pace = Math.round(dur / distance);
-    if (dur === null) dur = Math.round(pace * distance);
-    state.runs.push({ id: uid(), date: $('#r-date').value || todayStr(), distance, duration: dur, pace, ts: Date.now() });
+async function addRun() {
+  if (!$('#r-form').reportValidity()) return;
+  const distance = Math.round(parseFloat($('#r-dist').value) * 100) / 100;
+  if (!(distance > 0)) return toast('Enter a distance greater than 0.', 'error');
+  let dur = parseClock($('#r-dur').value);
+  let pace = parseClock($('#r-pace').value);
+  if (Number.isNaN(dur) || Number.isNaN(pace)) return toast('Use mm:ss or h:mm:ss for duration, and m:ss for pace.', 'error');
+  if (dur === null && pace === null) return toast('Enter a duration or a pace.', 'error');
+  if ((dur !== null && dur <= 0) || (pace !== null && pace <= 0)) return toast('Duration and pace must be greater than 0.', 'error');
+  if (pace === null) pace = Math.round(dur / distance);
+  if (dur === null) dur = Math.round(pace * distance);
+  
+  try {
+    await addDoc(collection(db, "runs"), {
+      date: $('#r-date').value || todayStr(), distance, duration: dur, pace, ts: Date.now()
+    });
     $('#r-dist').value = '';
     $('#r-dur').value = '';
     $('#r-pace').value = '';
     paceManual = false;
-    commit('Run added');
-  }
+  } catch (e) { toast('Error saving to cloud', 'error'); }
+}
 
-  function bindForm(selector, handler) {
-    const form = $(selector);
-    form.addEventListener('submit', e => { e.preventDefault(); handler(); });
-    form.addEventListener('keydown', e => {
-      if (e.key === 'Enter' && !e.isComposing && e.target.matches('input:not([type="radio"])')) { e.preventDefault(); handler(); }
-    });
-    $('[data-submit]', form).addEventListener('click', handler);
-  }
+function bindForm(selector, handler) {
+  const form = $(selector);
+  form.addEventListener('submit', e => { e.preventDefault(); handler(); });
+  form.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.isComposing && e.target.matches('input:not([type="radio"])')) { e.preventDefault(); handler(); }
+  });
+  $('[data-submit]', form).addEventListener('click', handler);
+}
 
-  /* ---------- Init ---------- */
-  function init() {
-    state = load();
+function init() {
+  state = { tab: 'finance', finance: [], tasks: [], goals: [], runs: [] };
 
-    $$('[data-icon]').forEach(el => { el.innerHTML = icon(el.dataset.icon); });
-    fill($('#f-account'), ACCOUNTS);
-    fill($('#f-to'), ACCOUNTS);
-    $('#f-to').value = ACCOUNTS[1];
-    fill($('#t-quad'), QUADS.map(q => [q.id, q.title]));
-    fill($('#g-time'), TIMEFRAMES);
-    $('#g-time').value = '1 Week';
-    $('#f-date').value = todayStr();
-    $('#r-date').value = todayStr();
-    syncFinanceForm();
+  $$('[data-icon]').forEach(el => { el.innerHTML = icon(el.dataset.icon); });
+  fill($('#f-account'), ACCOUNTS);
+  fill($('#f-to'), ACCOUNTS);
+  $('#f-to').value = ACCOUNTS[1];
+  fill($('#t-quad'), QUADS.map(q => [q.id, q.title]));
+  fill($('#g-time'), TIMEFRAMES);
+  $('#g-time').value = '1 Week';
+  $('#f-date').value = todayStr();
+  $('#r-date').value = todayStr();
+  syncFinanceForm();
 
-    $$('input[name="ftype"]').forEach(r => r.addEventListener('change', syncFinanceForm));
-    $('#f-amount').addEventListener('input', e => {
-      const v = Math.round(parseFloat(e.target.value));
-      $('#f-amount-hint').textContent = v > 0 ? money(v) : '';
-    });
-    $('#r-dist').addEventListener('input', autoPace);
-    $('#r-dur').addEventListener('input', autoPace);
-    $('#r-pace').addEventListener('input', e => { paceManual = e.target.value.trim() !== ''; });
+  $$('input[name="ftype"]').forEach(r => r.addEventListener('change', syncFinanceForm));
+  $('#f-amount').addEventListener('input', e => {
+    const v = Math.round(parseFloat(e.target.value));
+    $('#f-amount-hint').textContent = v > 0 ? money(v) : '';
+  });
+  $('#r-dist').addEventListener('input', autoPace);
+  $('#r-dur').addEventListener('input', autoPace);
+  $('#r-pace').addEventListener('input', e => { paceManual = e.target.value.trim() !== ''; });
 
-    bindForm('#f-form', addTransaction);
-    bindForm('#t-form', addTask);
-    bindForm('#g-form', addGoal);
-    bindForm('#r-form', addRun);
+  bindForm('#f-form', addTransaction);
+  bindForm('#t-form', addTask);
+  bindForm('#g-form', addGoal);
+  bindForm('#r-form', addRun);
 
-    $$('.nav button').forEach(b => b.addEventListener('click', () => {
-      setTab(b.dataset.tab, true);
-      window.scrollTo({ top: 0 });
-    }));
+  $$('.nav button').forEach(b => b.addEventListener('click', () => {
+    setTab(b.dataset.tab);
+    window.scrollTo({ top: 0 });
+  }));
 
-    document.addEventListener('click', e => {
-      const el = e.target.closest('[data-action]');
-      if (!el) return;
-      const action = el.dataset.action, id = el.dataset.id;
-      if (REMOVERS[action]) {
-        const list = REMOVERS[action][0];
-        state[list] = state[list].filter(x => x.id !== id);
-        commit(REMOVERS[action][1]);
-      } else if (action === 'toggle-task' || action === 'toggle-goal') {
-        const isTask = action === 'toggle-task';
-        const item = (isTask ? state.tasks : state.goals).find(x => x.id === id);
-        if (!item) return;
-        item.done = !item.done;
-        const what = isTask ? 'Task' : 'Goal';
-        commit(item.done ? what + ' marked as done' : what + ' reopened');
+  document.addEventListener('click', async e => {
+    const el = e.target.closest('[data-action]');
+    if (!el) return;
+    const action = el.dataset.action, id = el.dataset.id;
+
+    try {
+      if (action === 'del-tx') { await deleteDoc(doc(db, "finance", id)); toast('Transaction deleted'); }
+      else if (action === 'del-task') { await deleteDoc(doc(db, "tasks", id)); toast('Task deleted'); } 
+      else if (action === 'del-goal') { await deleteDoc(doc(db, "goals", id)); toast('Goal deleted'); } 
+      else if (action === 'del-run') { await deleteDoc(doc(db, "runs", id)); toast('Run deleted'); } 
+      else if (action === 'toggle-task') {
+        const item = state.tasks.find(x => x.id === id);
+        if (item) {
+          await updateDoc(doc(db, "tasks", id), { done: !item.done });
+          toast(item.done ? 'Task reopened' : 'Task marked as done');
+        }
       }
-    });
+      else if (action === 'toggle-goal') {
+        const item = state.goals.find(x => x.id === id);
+        if (item) {
+          await updateDoc(doc(db, "goals", id), { done: !item.done });
+          toast(item.done ? 'Goal reopened' : 'Goal marked as done');
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      toast('Error communicating with Cloud', 'error');
+    }
+  });
 
-    // Keep several open tabs of the same page in sync.
-    window.addEventListener('storage', e => {
-      if (e.key !== KEY) return;
-      const current = state.tab;
-      state = load();
-      state.tab = current;
-      renderAll();
-    });
+  setTab(state.tab);
+  
+  listenToTasks();
+  listenToFinance();
+  listenToGoals();
+  listenToRuns();
 
-    setTab(state.tab, false);
-    renderAll();
-    if (fresh) save();
-    renderStorageNote();
-  }
+  $('#storage-note').textContent = 'Synced securely to Cloud.';
+}
 
-  init();
-})();
+window.setTab = setTab;
+window.addTransaction = addTransaction;
+window.addTask = addTask;
+window.addGoal = addGoal;
+window.addRun = addRun;
+
+init();
 </script>
 </body>
 </html>
