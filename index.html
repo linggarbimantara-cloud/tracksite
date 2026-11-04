@@ -238,8 +238,27 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
 </head>
 <body>
 <div class="app">
-  <aside class="sidebar">
-    <div class="brand"><span class="brand-mark" data-icon="cloud"></span><span>TrackSite</span></div>
+  <!-- HOMEPAGE SECTION -->
+    <section id="homepage" style="grid-column: 1 / -1; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; text-align:center; padding: 24px; background: linear-gradient(135deg, #F2F7FC 0%, #E8F2FC 100%);">
+        
+        <img src="logotracksite.jpg" alt="TrackSite Logo" style="width:120px; height:120px; border-radius:32px; object-fit:cover; margin-bottom:24px; box-shadow: 0 10px 24px -12px rgba(36,90,150,0.3);">
+        
+        <h1 style="font-size:42px; font-weight:700; color:var(--ink); margin-bottom:12px; letter-spacing:-0.03em;">TrackSite</h1>
+        
+        <p style="font-size:18px; color:var(--muted); max-width:600px; margin-bottom:40px; line-height:1.6;">
+            Aplikasi pendamping produktivitas untuk mengelola keuangan, mengorganisir tugas, memantau tujuan jangka panjang, serta merekam progres harian menuju kampus impian Anda.
+        </p>
+        
+        <button type="button" id="btn-enter-dashboard" style="background:var(--accent); color:#fff; border:none; padding:16px 36px; font-size:16px; font-weight:600; border-radius:12px; cursor:pointer; box-shadow: 0 6px 14px -6px rgba(36,90,150,0.6);">
+            Masuk ke Dasbor
+        </button>
+
+    </section>
+  <aside class="sidebar" id="app-sidebar" hidden>
+    <div class="brand">
+  <img src="logotracksite.jpg" alt="TrackSite Logo" style="width:34px; height:34px; border-radius:11px; object-fit:cover; margin-right:10px;">
+  <span>TrackSite</span>
+</div>
     <nav class="nav" aria-label="Modules">
       <button type="button" data-tab="finance"><span class="ico" data-icon="cash"></span><span>Finance Track</span></button>
       <button type="button" data-tab="tasks"><span class="ico" data-icon="grid"></span><span>Task Track</span></button>
@@ -250,7 +269,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
     <p class="side-foot" id="storage-note">Saved in this browser.</p>
   </aside>
 
-  <main class="content">
+  <main class="content" id="app-main" hidden>
     <!-- Finance Track -->
     <section class="module" id="tab-finance" aria-labelledby="h-finance">
       <header class="module-head">
@@ -1308,6 +1327,20 @@ function init() {
   listenToUniPath();
 
   $('#storage-note').textContent = 'Synced securely to Cloud.';
+
+  // ---LOGIKA TOMBOL HOMEPAGE ---
+  document.getElementById('btn-enter-dashboard').addEventListener('click', () => {
+
+    // 1. Sembunyikan Homepage
+    document.getElementById('homepage').hidden = true;
+
+    // 2. Munculkan Sidebar dan Konten (Menggunakan querySelector agar kebal salah ketik ID)
+    document.querySelector('.sidebar').hidden = false;
+    document.querySelector('.content').hidden = false;
+
+    // 3. Render isi dasbor
+    setTab(state.tab || 'finance');
+  });
 }
 
 window.setTab = setTab;
