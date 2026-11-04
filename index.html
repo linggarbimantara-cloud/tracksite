@@ -26,6 +26,8 @@
   --pos-soft:#E1F4EC;
   --neg:#C23A33;
   --neg-soft:#FBE8E7;
+  --warn:#B86B11;
+  --warn-soft:#FEF3C7;
   --shadow:0 1px 2px rgba(36,90,150,.06),0 10px 24px -12px rgba(36,90,150,.16);
   --r-panel:18px;
   --r-item:12px;
@@ -159,11 +161,44 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
 .run dl{display:flex;gap:26px}
 .run dt{font-size:12.5px;color:var(--muted)}
 .run dd{font-weight:600}
+
+/* ---------- UniPath Module ---------- */
+.up-map{background:linear-gradient(135deg,#1E4E8C 0%,#2F6FB5 60%,#4D8FD6 100%);color:#fff;border:0;margin-bottom:20px;position:relative;overflow:hidden}
+.up-map-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px}
+.up-map-head h2{margin:0;font-size:20px;font-weight:700;color:#fff}
+.up-map-head p{font-size:13.5px;color:rgba(255,255,255,.85);margin-top:2px}
+.up-rank{padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.18);backdrop-filter:blur(4px);font-size:13px;font-weight:600;color:#fff}
+.up-track-wrap{position:relative;padding:28px 12px 8px}
+.up-bar-bg{height:10px;background:rgba(255,255,255,.22);border-radius:999px;position:relative}
+.up-bar-fill{height:100%;background:#7CE7AC;border-radius:999px;transition:width .4s ease}
+.up-hiker{position:absolute;top:-22px;transform:translateX(-50%);background:#fff;color:var(--accent-strong);padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;box-shadow:0 4px 12px rgba(0,0,0,.25);white-space:nowrap;transition:left .4s ease}
+.up-nodes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+.up-node{display:flex;flex-direction:column;gap:2px;font-size:12px;color:rgba(255,255,255,.75)}
+.up-node strong{color:#fff;font-size:13px}
+.up-node.reached strong{color:#7CE7AC}
+.up-etape{margin:28px 0 14px;display:flex;align-items:center;gap:10px}
+.up-etape-tag{padding:4px 10px;border-radius:8px;background:var(--accent);color:#fff;font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+.up-etape h2{font-size:19px;font-weight:700}
+.up-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
+.up-debt-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-radius:var(--r-item);margin-bottom:14px;background:var(--sky-100);border:1px solid var(--sky-200)}
+.up-debt-banner.has-debt{background:var(--neg-soft);border-color:#F3C3C0;color:var(--neg)}
+.up-debt-banner.clear{background:var(--pos-soft);border-color:#B8E6D4;color:var(--pos)}
+.up-debt-banner strong{font-size:18px}
+.up-log-list,.up-j-list{display:flex;flex-direction:column;gap:10px;margin-top:14px;max-height:320px;overflow-y:auto}
+.up-log-item,.up-j-item{padding:12px 14px;border:1px solid var(--line);border-radius:var(--r-item);background:#fff;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.up-badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:14px}
+.up-badge{padding:16px;border-radius:var(--r-panel);border:1px dashed var(--line-strong);background:rgba(255,255,255,.65);display:flex;flex-direction:column;gap:6px;opacity:.65;transition:all .2s}
+.up-badge.unlocked{opacity:1;border-style:solid;border-color:var(--accent);background:linear-gradient(180deg,#FFFFFF 0%,#EEF6FF 100%);box-shadow:var(--shadow)}
+.up-badge-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.up-badge-ico{font-size:24px}
+.up-badge h3{font-size:15px;font-weight:600}
+.up-badge p{font-size:12.5px;color:var(--muted)}
+
 .toast{position:fixed;left:50%;bottom:28px;z-index:50;max-width:min(92vw,420px);padding:11px 16px;border-radius:12px;background:var(--ink);color:#fff;font-size:14px;font-weight:500;box-shadow:0 12px 30px -10px rgba(27,43,61,.55);opacity:0;pointer-events:none;transform:translate(-50%,14px);transition:opacity .2s,transform .2s}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .toast.error{background:#8F2A25}
 @media (max-width:1080px){
-  .split{grid-template-columns:1fr}
+  .split,.up-two{grid-template-columns:1fr}
   .form-panel{position:static}
   .summary{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .summary .total{grid-column:1/-1}
@@ -183,7 +218,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
   .toast{bottom:96px}
 }
 @media (max-width:560px){
-  .form-stack,.f-task,.f-goal{grid-template-columns:1fr}
+  .form-stack,.f-task,.f-goal,.up-nodes{grid-template-columns:1fr}
   .f-goal .wide{grid-column:auto}
   .module-head h1{font-size:24px}
   .summary{gap:12px}
@@ -210,11 +245,13 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
       <button type="button" data-tab="tasks"><span class="ico" data-icon="grid"></span><span>Task Track</span></button>
       <button type="button" data-tab="goals"><span class="ico" data-icon="target"></span><span>Goal Track</span></button>
       <button type="button" data-tab="runs"><span class="ico" data-icon="route"></span><span>Daily Runn</span></button>
+      <button type="button" data-tab="unipath"><span class="ico" data-icon="compass"></span><span>UniPath</span></button>
     </nav>
     <p class="side-foot" id="storage-note">Saved in this browser.</p>
   </aside>
 
   <main class="content">
+    <!-- Finance Track -->
     <section class="module" id="tab-finance" aria-labelledby="h-finance">
       <header class="module-head">
         <h1 id="h-finance">Finance Track</h1>
@@ -258,6 +295,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
       </div>
     </section>
 
+    <!-- Task Track -->
     <section class="module" id="tab-tasks" aria-labelledby="h-tasks" hidden>
       <header class="module-head">
         <h1 id="h-tasks">Task Track</h1>
@@ -272,6 +310,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
       <div class="matrix" id="t-matrix"></div>
     </section>
 
+    <!-- Goal Track -->
     <section class="module" id="tab-goals" aria-labelledby="h-goals" hidden>
       <header class="module-head">
         <h1 id="h-goals">Goal Track</h1>
@@ -289,6 +328,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
       <div id="g-groups"></div>
     </section>
 
+    <!-- Daily Runn -->
     <section class="module" id="tab-runs" aria-labelledby="h-runs" hidden>
       <header class="module-head">
         <h1 id="h-runs">Daily Runn</h1>
@@ -313,6 +353,191 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
         </div>
       </div>
     </section>
+
+    <!-- UniPath (Menu Ke-5: Peta Petualangan Akademis) -->
+    <section class="module" id="tab-unipath" aria-labelledby="h-unipath" hidden>
+      <header class="module-head">
+        <h1 id="h-unipath">UniPath — Peta Petualangan Akademis</h1>
+        <p>Pendamping transisi dan peta jalan kelulusan SMA menuju gerbang perguruan tinggi impian.</p>
+      </header>
+
+      <!-- Peta Jalur Pendakian Interaktif -->
+      <div class="panel up-map">
+        <div class="up-map-head">
+          <div>
+            <h2 id="up-campus-display">Target: S1 Akuntansi — UGM</h2>
+            <p id="up-why-display">"Disiplin hari ini adalah tiket menuju gerbang kampus impian."</p>
+          </div>
+          <span class="up-rank" id="up-rank-badge">Level 1: Calon Petualang</span>
+        </div>
+        <div class="up-track-wrap">
+          <div class="up-bar-bg">
+            <div class="up-bar-fill" id="up-progress-fill" style="width:0%"></div>
+            <div class="up-hiker" id="up-hiker-pin" style="left:0%">🎒 0%</div>
+          </div>
+          <div class="up-nodes" id="up-map-nodes"></div>
+        </div>
+      </div>
+
+      <!-- Ringkasan Countdown & Statistik Petualangan -->
+      <div class="run-stats" id="up-top-stats"></div>
+
+      <!-- Pengaturan Target Ujian & Kampus -->
+      <details class="panel" style="margin-bottom:20px">
+        <summary style="cursor:pointer;font-weight:600;color:var(--accent-strong)">⚙️ Atur Target Kampus, Tanggal Ujian SNBT/Mandiri & Alasan Utama</summary>
+        <form class="form-grid f-goal" id="up-cfg-form" style="margin-top:14px">
+          <div class="field"><label for="up-cfg-campus">Kampus & Jurusan Impian</label><input id="up-cfg-campus" type="text" placeholder="misal: S1 Akuntansi - UGM" required></div>
+          <div class="field"><label for="up-cfg-exam">Nama Seleksi</label><input id="up-cfg-exam" type="text" placeholder="misal: UTBK - SNBT" required></div>
+          <div class="field"><label for="up-cfg-date">Tanggal Hari-H Ujian</label><input id="up-cfg-date" type="date" required></div>
+          <div class="field wide"><label for="up-cfg-why">Alasan Kuat (Strong Why) Masuk Jurusan Ini</label><input id="up-cfg-why" type="text" placeholder="Alasan yang membakar semangat saat lelah belajar..."></div>
+          <button type="button" class="btn" data-submit>Simpan Target</button>
+        </form>
+      </details>
+
+      <!-- ETAPE 1: PETA PERSIAPAN -->
+      <div class="up-etape">
+        <span class="up-etape-tag">Etape 1</span>
+        <h2>Peta Persiapan (Fase Pra-Kuliah)</h2>
+      </div>
+
+      <div class="up-two">
+        <!-- Daily Target & Progress Tracker (Logika Akumulatif Terkunci) -->
+        <div class="panel">
+          <div class="list-head">
+            <h2>Daily Target & Progress Tracker</h2>
+            <span class="pill" id="up-today-load">Beban Hari Ini: 0 Soal</span>
+          </div>
+          <p class="muted" style="margin-bottom:12px">Sisa target harian yang belum terpenuhi otomatis dikunci menjadi <strong>Utang Belajar</strong> untuk hari berikutnya.</p>
+
+          <div class="up-debt-banner" id="up-debt-box">
+            <div>
+              <div style="font-size:12.5px;font-weight:600">Status Akumulasi Utang Belajar (Terkunci)</div>
+              <div class="muted" id="up-debt-desc">Tidak ada utang soal. Pertahankan!</div>
+            </div>
+            <strong class="num" id="up-debt-num">0 Soal</strong>
+          </div>
+
+          <form class="form-stack" id="up-log-form">
+            <div class="field">
+              <label for="up-log-date">Tanggal Belajar</label>
+              <input id="up-log-date" type="date" required>
+            </div>
+            <div class="field">
+              <label for="up-log-sub">Subtes / Materi</label>
+              <select id="up-log-sub">
+                <option value="Pengetahuan Kuantitatif">Pengetahuan Kuantitatif</option>
+                <option value="Matematika Lanjutan">Matematika Lanjutan</option>
+                <option value="Penalaran Matematika">Penalaran Matematika</option>
+                <option value="Literasi B. Indonesia">Literasi B. Indonesia</option>
+                <option value="Literasi B. Inggris">Literasi B. Inggris</option>
+                <option value="Penalaran Umum">Penalaran Umum</option>
+                <option value="Ekonomi / TKA">Ekonomi / TKA</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="up-log-target">Input 1: Target Harian Baru (Soal)</label>
+              <input id="up-log-target" type="number" min="0" step="1" placeholder="misal: 30" required>
+            </div>
+            <div class="field">
+              <label for="up-log-done">Input 2: Berhasil Dikerjakan (Soal)</label>
+              <input id="up-log-done" type="number" min="0" step="1" placeholder="misal: 20" required>
+            </div>
+            <p class="hint full" id="up-calc-preview">Masukkan target dan progres untuk melihat simulasi akumulasi utang belajar.</p>
+            <button type="button" class="btn full" data-submit>Catat Progres & Kunci Akumulasi</button>
+          </form>
+
+          <div class="list-head" style="margin-top:18px">
+            <h2>Riwayat Setoran Soal</h2>
+            <span class="muted" id="up-log-count"></span>
+          </div>
+          <ul class="up-log-list" id="up-log-list"></ul>
+        </div>
+
+        <!-- Admission Checklist Tracker -->
+        <div class="panel">
+          <div class="list-head">
+            <h2>Admission Checklist Tracker</h2>
+            <button type="button" class="btn btn-quiet" id="up-seed-docs" style="min-height:32px;padding:0 12px;font-size:12.5px">+ Muat Berkas Standar</button>
+          </div>
+          <p class="muted" style="margin-bottom:14px">Pantau kelengkapan dokumen seleksi kuliah (sertifikat Pramuka/prestasi, rapor, ijazah, portofolio).</p>
+
+          <form class="form-stack" id="up-doc-form" style="margin-bottom:14px">
+            <div class="field">
+              <label for="up-doc-title">Nama Dokumen / Berkas</label>
+              <input id="up-doc-title" type="text" maxlength="100" placeholder="misal: Sertifikat Bantara Pramuka" required>
+            </div>
+            <div class="field">
+              <label for="up-doc-cat">Kategori Berkas</label>
+              <select id="up-doc-cat">
+                <option value="Prestasi & Organisasi">Prestasi & Organisasi</option>
+                <option value="Rapor & Ijazah">Rapor & Ijazah</option>
+                <option value="Administrasi & Identitas">Administrasi & Identitas</option>
+                <option value="Portofolio & Esai">Portofolio & Esai</option>
+              </select>
+            </div>
+            <button type="button" class="btn full" data-submit>Tambah Dokumen Checklist</button>
+          </form>
+
+          <ul id="up-doc-list"></ul>
+        </div>
+      </div>
+
+      <!-- ETAPE 2: JURNAL PENCAPAIAN -->
+      <div class="up-etape">
+        <span class="up-etape-tag">Etape 2</span>
+        <h2>Jurnal Pencapaian (Fase Evaluasi & Motivasi)</h2>
+      </div>
+
+      <!-- Motivation & Reflection Section (Fitur Utama Atas) -->
+      <div class="split" style="margin-bottom:20px">
+        <form class="panel" id="up-journal-form">
+          <h2>Motivation & Reflection</h2>
+          <div class="form-stack">
+            <div class="field">
+              <label for="up-j-date">Tanggal</label>
+              <input id="up-j-date" type="date" required>
+            </div>
+            <div class="field">
+              <label for="up-j-mood">Perasaan Hari Ini</label>
+              <select id="up-j-mood">
+                <option value="🔥 Bersemangat">🔥 Bersemangat</option>
+                <option value="🎯 Fokus & Tenang">🎯 Fokus & Tenang</option>
+                <option value="😤 Tertantang">😤 Tertantang</option>
+                <option value="😮‍💨 Lelah tapi Lanjut">😮‍💨 Lelah tapi Lanjut</option>
+                <option value="🌧️ Cemas / Butuh Evaluasi">🌧️ Cemas / Butuh Evaluasi</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="up-j-obs">Kendala Belajar yang Dihadapi</label>
+              <input id="up-j-obs" type="text" maxlength="140" placeholder="misal: Soal fungsi limit & trigonometri masih sering keliru..." required>
+            </div>
+            <div class="field full">
+              <label for="up-j-ref">Evaluasi Mandiri & Pengingat Motivasi</label>
+              <textarea id="up-j-ref" rows="3" maxlength="400" placeholder="Apa strategi perbaikan besok, dan mengapa kamu layak menembus kampus impianmu?" required></textarea>
+            </div>
+            <button type="button" class="btn full" data-submit>Simpan Refleksi Harian</button>
+          </div>
+        </form>
+
+        <div class="panel">
+          <div class="list-head">
+            <h2>Catatan Evaluasi & Mental</h2>
+            <span class="muted" id="up-j-count"></span>
+          </div>
+          <ul class="up-j-list" id="up-j-list"></ul>
+        </div>
+      </div>
+
+      <!-- Milestone Achievements (Fitur Utama Bawah) -->
+      <div class="panel">
+        <div class="list-head">
+          <h2>🏆 Milestone Achievements (Lencana Apresiasi)</h2>
+          <span class="pill" id="up-badge-counter">0 / 6 Terbuka</span>
+        </div>
+        <p class="muted">Lencana digital otomatis terbuka saat kamu menuntaskan target berkas, latihan soal, dan konsistensi refleksi.</p>
+        <div class="up-badges" id="up-badges-grid"></div>
+      </div>
+    </section>
   </main>
 </div>
 
@@ -335,8 +560,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const TABS = ['finance', 'tasks', 'goals', 'runs'];
-const TAB_TITLES = { finance: 'Finance Track', tasks: 'Task Track', goals: 'Goal Track', runs: 'Daily Runn' };
+const TABS = ['finance', 'tasks', 'goals', 'runs', 'unipath'];
+const TAB_TITLES = {
+  finance: 'Finance Track',
+  tasks: 'Task Track',
+  goals: 'Goal Track',
+  runs: 'Daily Runn',
+  unipath: 'UniPath'
+};
 const ACCOUNTS = ['Cash', 'Bank BRI', 'Bank Jatim', 'SeaBank', 'GoPay'];
 const CATEGORIES = {
   income: ['Allowance', 'Salary', 'Freelance', 'Gift', 'Refund', 'Opening balance', 'Other'],
@@ -350,12 +581,21 @@ const QUADS = [
   { id: 'q4', title: 'Neither', hint: 'Drop or postpone', bar: '#B7C9DA', tint: '#F7F9FB' }
 ];
 const TIMEFRAMES = ['Today', 'Tomorrow', '1 Week', '1 Month', 'Quarterly', 'Semester', '1 Year'];
+const DEFAULT_DOCS = [
+  { title: 'Sertifikat Pramuka / Pelantikan Bantara Ambalan', category: 'Prestasi & Organisasi' },
+  { title: 'Rapor Semester 1 s.d. 5 (Legalisir)', category: 'Rapor & Ijazah' },
+  { title: 'Ijazah / Surat Keterangan Lulus (SKL)', category: 'Rapor & Ijazah' },
+  { title: 'Kartu Peserta UTBK-SNBT & Identitas Diri', category: 'Administrasi & Identitas' },
+  { title: 'Pasfoto Resmi Latar Merah/Biru', category: 'Administrasi & Identitas' },
+  { title: 'Portofolio & Bukti Karya (TrackSite Web App)', category: 'Portofolio & Esai' }
+];
 const ICONS = {
   cloud: '<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>',
   cash: '<rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v.01M18 14.5v.01"/>',
   grid: '<rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="2"/><rect x="13" y="13" width="7.5" height="7.5" rx="2"/>',
   target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r=".6"/>',
   route: '<circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h8.5a3.5 3.5 0 0 0 0-7h-9a3.5 3.5 0 0 1 0-7H16"/>',
+  compass: '<circle cx="12" cy="12" r="9"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
   down: '<path d="M12 5v14M6 13l6 6 6-6"/>',
   up: '<path d="M12 19V5M6 11l6-6 6 6"/>',
   swap: '<path d="M4 8h15M15 4l4 4-4 4M20 16H5M9 12l-4 4 4 4"/>',
@@ -427,6 +667,13 @@ function listenToRuns() {
     state.runs = [];
     snapshot.forEach((doc) => state.runs.push({ id: doc.id, ...doc.data() }));
     renderRuns();
+  });
+}
+function listenToUniPath() {
+  onSnapshot(collection(db, "unipath"), (snapshot) => {
+    state.unipath = [];
+    snapshot.forEach((doc) => state.unipath.push({ id: doc.id, ...doc.data() }));
+    renderUniPath();
   });
 }
 
@@ -583,11 +830,181 @@ function renderRuns() {
   $('#r-list').innerHTML = runs.length ? runs.map(runCard).join('') : '<p class="empty-box">No runs yet. Log your first run with the form.</p>';
 }
 
+/* ---------- UniPath Rendering & Logic ---------- */
+function getUniConfig() {
+  const cfg = state.unipath.find(x => x.kind === 'config');
+  return {
+    id: cfg ? cfg.id : null,
+    campus: (cfg && cfg.campus) || 'S1 Akuntansi — UGM',
+    exam: (cfg && cfg.exam) || 'UTBK - SNBT',
+    examDate: (cfg && cfg.examDate) || '2027-04-21',
+    why: (cfg && cfg.why) || 'Menjadi ahli akuntansi & keuangan yang membanggakan serta bermanfaat luas.'
+  };
+}
+
+function calcUniDebt() {
+  const logs = state.unipath.filter(x => x.kind === 'log').sort((a, b) => (a.ts || 0) - (b.ts || 0));
+  let debt = 0, totalSolved = 0;
+  logs.forEach(l => {
+    const t = Math.max(0, Number(l.target) || 0);
+    const d = Math.max(0, Number(l.doneCount) || 0);
+    totalSolved += d;
+    debt = Math.max(0, debt + t - d);
+  });
+  return { debt, totalSolved, logs };
+}
+
+function updateUniPreview() {
+  const { debt } = calcUniDebt();
+  const t = Math.max(0, parseInt($('#up-log-target').value, 10) || 0);
+  const d = Math.max(0, parseInt($('#up-log-done').value, 10) || 0);
+  const totalToday = debt + t;
+  const nextDebt = Math.max(0, totalToday - d);
+  $('#up-today-load').textContent = 'Beban Hari Ini: ' + totalToday + ' Soal';
+  $('#up-calc-preview').textContent =
+    'Simulasi: Utang Lama (' + debt + ') + Target Baru (' + t + ') = ' + totalToday +
+    ' Soal. Dikerjakan (' + d + ') → Sisa Utang Terkunci Besok: ' + nextDebt + ' Soal.';
+}
+
+function renderUniPath() {
+  const cfg = getUniConfig();
+  const docs = state.unipath.filter(x => x.kind === 'doc').sort(goalSort);
+  const journals = state.unipath.filter(x => x.kind === 'journal').sort(sortByDate);
+  const { debt, totalSolved, logs } = calcUniDebt();
+
+  $('#up-campus-display').textContent = 'Target: ' + cfg.campus;
+  $('#up-why-display').textContent = '"' + cfg.why + '"';
+  if (document.activeElement !== $('#up-cfg-campus')) $('#up-cfg-campus').value = cfg.campus;
+  if (document.activeElement !== $('#up-cfg-exam')) $('#up-cfg-exam').value = cfg.exam;
+  if (document.activeElement !== $('#up-cfg-date')) $('#up-cfg-date').value = cfg.examDate;
+  if (document.activeElement !== $('#up-cfg-why')) $('#up-cfg-why').value = cfg.why;
+
+  // Hitung Progres Peta Petualangan (0 - 100%)
+  const docDone = docs.filter(d => d.done).length;
+  const docScore = docs.length ? Math.min(1, docDone / docs.length) * 35 : 0;
+  const qScore = Math.min(1, totalSolved / 200) * 45;
+  const jScore = Math.min(1, journals.length / 7) * 20;
+  const pct = Math.min(100, Math.round(docScore + qScore + jScore));
+
+  $('#up-progress-fill').style.width = pct + '%';
+  $('#up-hiker-pin').style.left = pct + '%';
+  $('#up-hiker-pin').textContent = (pct >= 100 ? '🏛️ ' : '🎒 ') + pct + '%';
+
+  const rankTitle =
+    pct >= 90 ? 'Level 4: Penakluk Gerbang Kampus' :
+    pct >= 60 ? 'Level 3: Bantara Pejuang UTBK' :
+    pct >= 25 ? 'Level 2: Pendaki Konsisten' : 'Level 1: Calon Petualang';
+  $('#up-rank-badge').textContent = rankTitle;
+
+  const checkpoints = [
+    { label: 'Start: Pos Persiapan', sub: 'Niat & Target Kampus', min: 0 },
+    { label: 'Pos 1: Administrasi', sub: docDone + '/' + docs.length + ' Berkas Siap', min: 25 },
+    { label: 'Pos 2: Kemah Latihan', sub: totalSolved + ' Soal Tuntas', min: 60 },
+    { label: 'Finish: Gerbang Kampus', sub: cfg.campus, min: 95 }
+  ];
+  $('#up-map-nodes').innerHTML = checkpoints.map(c =>
+    '<div class="up-node' + (pct >= c.min ? ' reached' : '') + '">' +
+      '<strong>' + (pct >= c.min ? '✓ ' : '○ ') + esc(c.label) + '</strong>' +
+      '<span>' + esc(c.sub) + '</span>' +
+    '</div>'
+  ).join('');
+
+  // Statistik Countdown & Ringkasan Atas
+  const dLeft = DATE_RE.test(cfg.examDate) ? daysFrom(cfg.examDate) : null;
+  const cdText = dLeft === null ? 'Belum diatur' : dLeft > 0 ? dLeft + ' Hari Lagi' : dLeft === 0 ? 'Hari H Ujian!' : 'Selesai';
+  const uniqueDays = new Set(logs.map(l => l.date)).size;
+  const topStats = [
+    ['Countdown ' + cfg.exam, cdText],
+    ['Total Soal Selesai', totalSolved + ' Soal'],
+    ['Utang Belajar Terkunci', debt + ' Soal'],
+    ['Berkas & Hari Belajar', docDone + '/' + docs.length + ' Berkas • ' + uniqueDays + ' Hari']
+  ];
+  $('#up-top-stats').innerHTML = topStats.map(s =>
+    '<div class="panel stat"><span class="label">' + esc(s[0]) + '</span><span class="value num">' + esc(s[1]) + '</span></div>'
+  ).join('');
+
+  // Banner Utang Belajar
+  const debtBox = $('#up-debt-box');
+  debtBox.className = 'up-debt-banner ' + (debt > 0 ? 'has-debt' : 'clear');
+  $('#up-debt-num').textContent = debt + ' Soal';
+  $('#up-debt-desc').textContent = debt > 0
+    ? 'Otomatis ditambahkan ke target belajar hari ini agar tidak ada utang yang terlupakan.'
+    : 'Luar biasa! Tidak ada tunggakan soal. Semua target harian lunas.';
+  updateUniPreview();
+
+  // Riwayat Setoran Soal
+  const sortedLogs = logs.slice().reverse();
+  $('#up-log-count').textContent = sortedLogs.length ? sortedLogs.length + ' sesi' : '';
+  $('#up-log-list').innerHTML = sortedLogs.length ? sortedLogs.slice(0, 15).map(l => {
+    const rem = Number(l.debtAfter) || 0;
+    return '<li class="up-log-item">' +
+      '<div>' +
+        '<div style="font-weight:600">' + esc(l.subject) + ' <span class="muted">(' + fmtDate(l.date) + ')</span></div>' +
+        '<div class="muted">Target Baru: ' + (l.target || 0) + ' • Utang Bawaan: ' + (l.debtBefore || 0) + ' • Selesai: <strong>' + (l.doneCount || 0) + ' soal</strong></div>' +
+      '</div>' +
+      '<div style="display:flex;align-items:center;gap:8px">' +
+        '<span class="pill" style="' + (rem > 0 ? 'background:var(--neg-soft);color:var(--neg)' : 'background:var(--pos-soft);color:var(--pos)') + '">' +
+          (rem > 0 ? 'Utang +' + rem : 'Lunas') +
+        '</span>' +
+        '<button type="button" class="icon-btn danger" data-action="del-unipath" data-id="' + esc(l.id) + '" aria-label="Hapus log">' + icon('x') + '</button>' +
+      '</div>' +
+    '</li>';
+  }).join('') : '<li class="empty">Belum ada setoran soal. Masukkan target harian pertamamu di atas!</li>';
+
+  // Admission Checklist
+  $('#up-doc-list').innerHTML = docs.length ? docs.map(d =>
+    '<li class="task' + (d.done ? ' done' : '') + '">' +
+      '<button type="button" class="check" data-action="toggle-unidoc" data-id="' + esc(d.id) + '" aria-pressed="' + (d.done ? 'true' : 'false') + '">' + icon('check') + '</button>' +
+      '<div><div class="task-title">' + esc(d.title) + '</div><div class="due"><span class="rel">' + esc(d.category) + '</span></div></div>' +
+      '<button type="button" class="icon-btn danger" data-action="del-unipath" data-id="' + esc(d.id) + '" aria-label="Hapus berkas">' + icon('x') + '</button>' +
+    '</li>'
+  ).join('') : '<li class="empty">Daftar berkas masih kosong. Klik "+ Muat Berkas Standar" di kanan atas atau tambahkan manual.</li>';
+
+  // Jurnal Refleksi
+  $('#up-j-count').textContent = journals.length ? journals.length + ' catatan' : '';
+  $('#up-j-list').innerHTML = journals.length ? journals.map(j =>
+    '<li class="up-j-item">' +
+      '<div>' +
+        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">' +
+          '<span class="pill">' + esc(j.mood) + '</span>' +
+          '<span class="muted">' + fmtDate(j.date) + '</span>' +
+        '</div>' +
+        '<div style="font-weight:600;font-size:14px">Kendala: ' + esc(j.obstacle) + '</div>' +
+        '<p class="muted" style="margin-top:4px;color:var(--ink)">' + esc(j.reflection) + '</p>' +
+      '</div>' +
+      '<button type="button" class="icon-btn danger" data-action="del-unipath" data-id="' + esc(j.id) + '" aria-label="Hapus jurnal">' + icon('x') + '</button>' +
+    '</li>'
+  ).join('') : '<li class="empty">Belum ada jurnal refleksi. Tuliskan perasaan dan evaluasi belajarmu hari ini!</li>';
+
+  // Milestone Achievements (Badges)
+  const badges = [
+    { ico: '🏕️', title: 'Langkah Pertama Petualang', desc: 'Mencatat progres soal atau jurnal refleksi pertama kali.', ok: logs.length > 0 || journals.length > 0 },
+    { ico: '⚜️', title: 'Bantara Ujian Lulus!', desc: 'Menuntaskan minimal 5 dokumen di Admission Checklist.', ok: docDone >= 5 || (docs.length > 0 && docDone === docs.length) },
+    { ico: '🎯', title: '100 Soal Pertama Terlewati!', desc: 'Akumulasi latihan mencapai minimal 100 soal selesai.', ok: totalSolved >= 100 },
+    { ico: '🔥', title: 'Konsisten 7 Hari Belajar!', desc: 'Menyetorkan progres belajar pada minimal 7 hari berbeda.', ok: uniqueDays >= 7 },
+    { ico: '🛡️', title: 'Penakluk Utang Belajar!', desc: 'Berhasil menjaga saldo Utang Belajar 0 setelah minimal 3 sesi latihan.', ok: logs.length >= 3 && debt === 0 },
+    { ico: '🏛️', title: 'Siap Tembus Gerbang Kampus!', desc: 'Mencapai progres Peta Petualangan minimal 90%.', ok: pct >= 90 }
+  ];
+  const unlockedCount = badges.filter(b => b.ok).length;
+  $('#up-badge-counter').textContent = unlockedCount + ' / ' + badges.length + ' Terbuka';
+  $('#up-badges-grid').innerHTML = badges.map(b =>
+    '<article class="up-badge' + (b.ok ? ' unlocked' : '') + '">' +
+      '<div class="up-badge-top">' +
+        '<span class="up-badge-ico">' + b.ico + '</span>' +
+        '<span class="pill" style="' + (b.ok ? 'background:var(--pos-soft);color:var(--pos)' : '') + '">' + (b.ok ? 'Terbuka ✓' : 'Terkunci 🔒') + '</span>' +
+      '</div>' +
+      '<h3>' + esc(b.title) + '</h3>' +
+      '<p>' + esc(b.desc) + '</p>' +
+    '</article>'
+  ).join('');
+}
+
 function renderAll() {
   renderFinance();
   renderTasks();
   renderGoals();
   renderRuns();
+  renderUniPath();
 }
 
 function fill(select, items) {
@@ -693,6 +1110,106 @@ async function addRun() {
   } catch (e) { toast('Error saving to cloud', 'error'); }
 }
 
+/* ---------- UniPath Form Actions ---------- */
+async function saveUniConfig() {
+  if (!$('#up-cfg-form').reportValidity()) return;
+  const existing = state.unipath.find(x => x.kind === 'config');
+  const payload = {
+    kind: 'config',
+    campus: $('#up-cfg-campus').value.trim(),
+    exam: $('#up-cfg-exam').value.trim(),
+    examDate: $('#up-cfg-date').value,
+    why: $('#up-cfg-why').value.trim(),
+    ts: Date.now()
+  };
+  try {
+    if (existing) await updateDoc(doc(db, "unipath", existing.id), payload);
+    else await addDoc(collection(db, "unipath"), payload);
+    toast('Target UniPath diperbarui!');
+  } catch (e) { toast('Gagal menyimpan target', 'error'); }
+}
+
+async function addUniLog() {
+  if (!$('#up-log-form').reportValidity()) return;
+  const target = Math.max(0, parseInt($('#up-log-target').value, 10) || 0);
+  const doneCount = Math.max(0, parseInt($('#up-log-done').value, 10) || 0);
+  if (target === 0 && doneCount === 0) return toast('Masukkan jumlah soal target atau selesai.', 'error');
+
+  const { debt } = calcUniDebt();
+  const debtAfter = Math.max(0, debt + target - doneCount);
+
+  try {
+    await addDoc(collection(db, "unipath"), {
+      kind: 'log',
+      date: $('#up-log-date').value || todayStr(),
+      subject: $('#up-log-sub').value,
+      target,
+      doneCount,
+      debtBefore: debt,
+      debtAfter,
+      ts: Date.now()
+    });
+    $('#up-log-target').value = '';
+    $('#up-log-done').value = '';
+    toast(debtAfter > 0 ? 'Tersimpan! Sisa ' + debtAfter + ' soal dikunci ke utang besok.' : 'Target tuntas tanpa utang soal!');
+  } catch (e) { toast('Gagal menyimpan progres', 'error'); }
+}
+
+async function addUniDoc() {
+  if (!$('#up-doc-form').reportValidity()) return;
+  const title = $('#up-doc-title').value.trim();
+  if (!title) return;
+  try {
+    await addDoc(collection(db, "unipath"), {
+      kind: 'doc',
+      title,
+      category: $('#up-doc-cat').value,
+      done: false,
+      ts: Date.now()
+    });
+    $('#up-doc-title').value = '';
+    toast('Dokumen ditambahkan ke checklist!');
+  } catch (e) { toast('Gagal menambah dokumen', 'error'); }
+}
+
+async function seedUniDocs() {
+  const existingTitles = new Set(state.unipath.filter(x => x.kind === 'doc').map(d => d.title));
+  const toAdd = DEFAULT_DOCS.filter(d => !existingTitles.has(d.title));
+  if (!toAdd.length) return toast('Semua berkas standar sudah ada di daftar.');
+  try {
+    for (const item of toAdd) {
+      await addDoc(collection(db, "unipath"), {
+        kind: 'doc',
+        title: item.title,
+        category: item.category,
+        done: false,
+        ts: Date.now()
+      });
+    }
+    toast('Berkas standar berhasil dimuat!');
+  } catch (e) { toast('Gagal memuat berkas standar', 'error'); }
+}
+
+async function addUniJournal() {
+  if (!$('#up-journal-form').reportValidity()) return;
+  const obstacle = $('#up-j-obs').value.trim();
+  const reflection = $('#up-j-ref').value.trim();
+  if (!obstacle || !reflection) return;
+  try {
+    await addDoc(collection(db, "unipath"), {
+      kind: 'journal',
+      date: $('#up-j-date').value || todayStr(),
+      mood: $('#up-j-mood').value,
+      obstacle,
+      reflection,
+      ts: Date.now()
+    });
+    $('#up-j-obs').value = '';
+    $('#up-j-ref').value = '';
+    toast('Jurnal refleksi berhasil disimpan!');
+  } catch (e) { toast('Gagal menyimpan jurnal', 'error'); }
+}
+
 function bindForm(selector, handler) {
   const form = $(selector);
   form.addEventListener('submit', e => { e.preventDefault(); handler(); });
@@ -703,7 +1220,7 @@ function bindForm(selector, handler) {
 }
 
 function init() {
-  state = { tab: 'finance', finance: [], tasks: [], goals: [], runs: [] };
+  state = { tab: 'finance', finance: [], tasks: [], goals: [], runs: [], unipath: [] };
 
   $$('[data-icon]').forEach(el => { el.innerHTML = icon(el.dataset.icon); });
   fill($('#f-account'), ACCOUNTS);
@@ -714,6 +1231,8 @@ function init() {
   $('#g-time').value = '1 Week';
   $('#f-date').value = todayStr();
   $('#r-date').value = todayStr();
+  $('#up-log-date').value = todayStr();
+  $('#up-j-date').value = todayStr();
   syncFinanceForm();
 
   $$('input[name="ftype"]').forEach(r => r.addEventListener('change', syncFinanceForm));
@@ -724,11 +1243,18 @@ function init() {
   $('#r-dist').addEventListener('input', autoPace);
   $('#r-dur').addEventListener('input', autoPace);
   $('#r-pace').addEventListener('input', e => { paceManual = e.target.value.trim() !== ''; });
+  $('#up-log-target').addEventListener('input', updateUniPreview);
+  $('#up-log-done').addEventListener('input', updateUniPreview);
+  $('#up-seed-docs').addEventListener('click', seedUniDocs);
 
   bindForm('#f-form', addTransaction);
   bindForm('#t-form', addTask);
   bindForm('#g-form', addGoal);
   bindForm('#r-form', addRun);
+  bindForm('#up-cfg-form', saveUniConfig);
+  bindForm('#up-log-form', addUniLog);
+  bindForm('#up-doc-form', addUniDoc);
+  bindForm('#up-journal-form', addUniJournal);
 
   $$('.nav button').forEach(b => b.addEventListener('click', () => {
     setTab(b.dataset.tab);
@@ -745,6 +1271,7 @@ function init() {
       else if (action === 'del-task') { await deleteDoc(doc(db, "tasks", id)); toast('Task deleted'); } 
       else if (action === 'del-goal') { await deleteDoc(doc(db, "goals", id)); toast('Goal deleted'); } 
       else if (action === 'del-run') { await deleteDoc(doc(db, "runs", id)); toast('Run deleted'); } 
+      else if (action === 'del-unipath') { await deleteDoc(doc(db, "unipath", id)); toast('Item UniPath dihapus'); }
       else if (action === 'toggle-task') {
         const item = state.tasks.find(x => x.id === id);
         if (item) {
@@ -759,6 +1286,13 @@ function init() {
           toast(item.done ? 'Goal reopened' : 'Goal marked as done');
         }
       }
+      else if (action === 'toggle-unidoc') {
+        const item = state.unipath.find(x => x.id === id);
+        if (item) {
+          await updateDoc(doc(db, "unipath", id), { done: !item.done });
+          toast(item.done ? 'Berkas dibuka kembali' : 'Berkas selesai disiapkan!');
+        }
+      }
     } catch (err) {
       console.error(err);
       toast('Error communicating with Cloud', 'error');
@@ -771,6 +1305,7 @@ function init() {
   listenToFinance();
   listenToGoals();
   listenToRuns();
+  listenToUniPath();
 
   $('#storage-note').textContent = 'Synced securely to Cloud.';
 }
