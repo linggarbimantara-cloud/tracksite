@@ -238,36 +238,72 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
 </style>
 </head>
 <body>
-<!-- LAYAR GEMBOK TRACKSITE -->
-    <div id="login-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background: linear-gradient(135deg, #F2F7FC 0%, #E8F2FC 100%); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center;">
-        <div style="background:#fff; padding:40px 30px; border-radius:16px; box-shadow:0 10px 30px rgba(36,90,150,0.15); width:90%; max-width:380px; text-align:center;">
-            <img src="logotracksite.svg" alt="Logo" style="width:70px; height:70px; margin-bottom:20px; border-radius:16px;">
-            <h2 style="margin-top:0; margin-bottom:24px; color:var(--ink);">Brankas TrackSite</h2>
-            
-            <input type="email" id="ts-email" placeholder="Email Rahasia" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px; box-sizing:border-box; font-size:14px;">
-            <input type="password" id="ts-pass" placeholder="Password" style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ccc; border-radius:8px; box-sizing:border-box; font-size:14px;">
-            
-            <button id="btn-ts-login" style="width:100%; padding:14px; background:var(--accent); color:white; border:none; border-radius:8px; font-weight:bold; font-size:15px; cursor:pointer; box-shadow: 0 4px 10px rgba(36,90,150,0.3);">Buka Brankas</button>
-            <p id="ts-login-error" style="color:#ea4335; font-size:13px; display:none; margin-top:15px; font-weight:600;">Login gagal. Periksa kembali!</p>
+
+<!-- LAYAR GEMBOK TRACKSITE (PREMIUM VAULT) -->
+<div id="login-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family: 'Segoe UI', sans-serif;">
+    <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 40px 32px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); width: 90%; max-width: 400px; text-align: center; color: white;">
+        <!-- Ikon Gembok Vektor (Anti Rusak) -->
+        <svg style="width:64px; height:64px; margin-bottom:16px; color:#38bdf8;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+        </svg>
+        
+        <h2 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 700; letter-spacing: 0.5px;">TrackSite Vault</h2>
+        <p style="margin: 0 0 32px 0; font-size: 14px; color: #94a3b8;">Restricted Access. Master Bima Only.</p>
+        
+        <!-- Input Email -->
+        <div style="text-align: left; margin-bottom: 16px;">
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #cbd5e1; margin-bottom: 8px;">Email Identitas</label>
+            <input type="email" id="ts-email" placeholder="master@tracksite.com" style="width: 100%; padding: 14px 16px; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; outline: none; box-sizing: border-box; transition: all 0.3s;" onfocus="this.style.borderColor='#38bdf8'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
         </div>
+        
+        <!-- Input Password & Tombol Mata -->
+        <div style="text-align: left; margin-bottom: 28px; position: relative;">
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #cbd5e1; margin-bottom: 8px;">Kata Sandi Rahasia</label>
+            <input type="password" id="ts-pass" placeholder="••••••••••••" style="width: 100%; padding: 14px 16px; padding-right: 50px; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; outline: none; box-sizing: border-box; transition: all 0.3s;" onfocus="this.style.borderColor='#38bdf8'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+            
+            <!-- Tombol Show Password -->
+            <button type="button" onclick="togglePassword()" style="position: absolute; right: 12px; top: 37px; background: none; border: none; color: #94a3b8; cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center;">
+                <svg id="eye-icon" style="width:22px; height:22px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <button onclick="window.prosesLoginMaster()" id="btn-ts-login" style="width: 100%; padding: 14px; background: #0284c7; color: white; border: none; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);">Otorisasi Akses</button>
+        
+        <p id="ts-login-error" style="color: #f87171; font-size: 13px; display: none; margin-top: 16px; font-weight: 500;">Akses Ditolak: Kredensial tidak valid.</p>
     </div>
+</div>
+
+<!-- Script Logika Toggle Mata -->
+<script>
+    function togglePassword() {
+        const passInput = document.getElementById('ts-pass');
+        const eyeIcon = document.getElementById('eye-icon');
+        if (passInput.type === 'password') {
+            passInput.type = 'text';
+            eyeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path>';
+        } else {
+            passInput.type = 'password';
+            eyeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>';
+        }
+    }
+</script>
+
 <div class="app">
   <!-- HOMEPAGE SECTION -->
     <section id="homepage" style="grid-column: 1 / -1; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; text-align:center; padding: 24px; background: linear-gradient(135deg, #F2F7FC 0%, #E8F2FC 100%);">
-        
         <img src="logotracksite.png" alt="TrackSite Logo" style="width:120px; height:120px; border-radius:32px; object-fit:cover; margin-bottom:24px; box-shadow: 0 10px 24px -12px rgba(36,90,150,0.3);">
-        
         <h1 style="font-size:42px; font-weight:700; color:var(--ink); margin-bottom:12px; letter-spacing:-0.03em;">TrackSite</h1>
-        
         <p style="font-size:18px; color:var(--muted); max-width:600px; margin-bottom:40px; line-height:1.6;">
             Aplikasi pendamping produktivitas untuk mengelola keuangan, mengorganisir tugas, memantau tujuan jangka panjang, serta merekam progres harian menuju kampus impian Anda.
         </p>
-        
         <button type="button" id="btn-enter-dashboard" style="background:var(--accent); color:#fff; border:none; padding:16px 36px; font-size:16px; font-weight:600; border-radius:12px; cursor:pointer; box-shadow: 0 6px 14px -6px rgba(36,90,150,0.6);">
             Masuk ke Dasbor
         </button>
-
     </section>
+
   <aside class="sidebar" id="app-sidebar" hidden>
     <div class="brand">
   <img src="logotracksite.png" alt="TrackSite Logo" style="width:34px; height:34px; border-radius:11px; object-fit:cover; margin-right:10px;">
@@ -387,7 +423,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
       </div>
     </section>
 
-    <!-- UniPath (Menu Ke-5: Peta Petualangan Akademis) -->
+    <!-- UniPath -->
     <section class="module" id="tab-unipath" aria-labelledby="h-unipath" hidden>
       <header class="module-head">
         <h1 id="h-unipath">UniPath — Peta Petualangan Akademis</h1>
@@ -434,7 +470,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
       </div>
 
       <div class="up-two">
-        <!-- Daily Target & Progress Tracker (Logika Akumulatif Terkunci) -->
+        <!-- Daily Target & Progress Tracker -->
         <div class="panel">
           <div class="list-head">
             <h2>Daily Target & Progress Tracker</h2>
@@ -510,7 +546,6 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
             </div>
             <button type="button" class="btn full" data-submit>Tambah Dokumen Checklist</button>
           </form>
-
           <ul id="up-doc-list"></ul>
         </div>
       </div>
@@ -521,7 +556,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
         <h2>Jurnal Pencapaian (Fase Evaluasi & Motivasi)</h2>
       </div>
 
-      <!-- Motivation & Reflection Section (Fitur Utama Atas) -->
+      <!-- Motivation & Reflection Section -->
       <div class="split" style="margin-bottom:20px">
         <form class="panel" id="up-journal-form">
           <h2>Motivation & Reflection</h2>
@@ -561,7 +596,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
         </div>
       </div>
 
-      <!-- Milestone Achievements (Fitur Utama Bawah) -->
+      <!-- Milestone Achievements -->
       <div class="panel">
         <div class="list-head">
           <h2>🏆 Milestone Achievements (Lencana Apresiasi)</h2>
@@ -593,49 +628,42 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
 const auth = getAuth(app);
 
-// 1. Pantau Status Login (Otomatis menyembunyikan layar login jika sukses)
+// 1. Pantau Status Login Otomatis
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        // Jika sudah login, singkirkan layar penutup
         document.getElementById('login-overlay').style.display = 'none';
-        
-        // (Pastikan fungsi pemanggil database Anda seperti listenToFinance(), dll tetap berjalan di bawah sini seperti biasa)
     } else {
-        // Jika belum login / di-logout, paksa munculkan layar penutup
         document.getElementById('login-overlay').style.display = 'flex';
     }
 });
 
-// 2. Aksi Tombol Login
-document.getElementById('btn-ts-login').addEventListener('click', () => {
+// 2. Fungsi Klik Antibadai (Diekspor ke window)
+window.prosesLoginMaster = function() {
     const email = document.getElementById('ts-email').value;
     const pass = document.getElementById('ts-pass').value;
+    const btn = document.getElementById('btn-ts-login');
     
-    // Ubah teks tombol saat loading
-    document.getElementById('btn-ts-login').innerText = "Membuka...";
+    // Efek loading
+    btn.innerText = "Memverifikasi Otoritas...";
+    btn.style.background = "#0369a1";
     
     signInWithEmailAndPassword(auth, email, pass)
         .then((userCredential) => {
             document.getElementById('ts-login-error').style.display = 'none';
-            document.getElementById('btn-ts-login').innerText = "Buka Brankas";
+            btn.innerText = "Akses Diberikan";
         })
         .catch((error) => {
             document.getElementById('ts-login-error').style.display = 'block';
-            document.getElementById('btn-ts-login').innerText = "Buka Brankas";
+            btn.innerText = "Otorisasi Akses";
+            btn.style.background = "#0284c7";
+            console.error(error);
         });
-});
+};
 
 const TABS = ['finance', 'tasks', 'goals', 'runs', 'unipath'];
-const TAB_TITLES = {
-  finance: 'Finance Track',
-  tasks: 'Task Track',
-  goals: 'Goal Track',
-  runs: 'Daily Runn',
-  unipath: 'UniPath'
-};
+const TAB_TITLES = { finance: 'Finance Track', tasks: 'Task Track', goals: 'Goal Track', runs: 'Daily Runn', unipath: 'UniPath' };
 const ACCOUNTS = ['Cash', 'Bank BRI', 'Bank Jatim', 'SeaBank', 'GoPay'];
 const CATEGORIES = {
   income: ['Allowance', 'Salary', 'Freelance', 'Gift', 'Refund', 'Opening balance', 'Other'],
@@ -898,7 +926,6 @@ function renderRuns() {
   $('#r-list').innerHTML = runs.length ? runs.map(runCard).join('') : '<p class="empty-box">No runs yet. Log your first run with the form.</p>';
 }
 
-/* ---------- UniPath Rendering & Logic ---------- */
 function getUniConfig() {
   const cfg = state.unipath.find(x => x.kind === 'config');
   return {
@@ -947,7 +974,6 @@ function renderUniPath() {
   if (document.activeElement !== $('#up-cfg-date')) $('#up-cfg-date').value = cfg.examDate;
   if (document.activeElement !== $('#up-cfg-why')) $('#up-cfg-why').value = cfg.why;
 
-  // Hitung Progres Peta Petualangan (0 - 100%)
   const docDone = docs.filter(d => d.done).length;
   const docScore = docs.length ? Math.min(1, docDone / docs.length) * 35 : 0;
   const qScore = Math.min(1, totalSolved / 200) * 45;
@@ -977,7 +1003,6 @@ function renderUniPath() {
     '</div>'
   ).join('');
 
-  // Statistik Countdown & Ringkasan Atas
   const dLeft = DATE_RE.test(cfg.examDate) ? daysFrom(cfg.examDate) : null;
   const cdText = dLeft === null ? 'Belum diatur' : dLeft > 0 ? dLeft + ' Hari Lagi' : dLeft === 0 ? 'Hari H Ujian!' : 'Selesai';
   const uniqueDays = new Set(logs.map(l => l.date)).size;
@@ -991,7 +1016,6 @@ function renderUniPath() {
     '<div class="panel stat"><span class="label">' + esc(s[0]) + '</span><span class="value num">' + esc(s[1]) + '</span></div>'
   ).join('');
 
-  // Banner Utang Belajar
   const debtBox = $('#up-debt-box');
   debtBox.className = 'up-debt-banner ' + (debt > 0 ? 'has-debt' : 'clear');
   $('#up-debt-num').textContent = debt + ' Soal';
@@ -1000,7 +1024,6 @@ function renderUniPath() {
     : 'Luar biasa! Tidak ada tunggakan soal. Semua target harian lunas.';
   updateUniPreview();
 
-  // Riwayat Setoran Soal
   const sortedLogs = logs.slice().reverse();
   $('#up-log-count').textContent = sortedLogs.length ? sortedLogs.length + ' sesi' : '';
   $('#up-log-list').innerHTML = sortedLogs.length ? sortedLogs.slice(0, 15).map(l => {
@@ -1019,7 +1042,6 @@ function renderUniPath() {
     '</li>';
   }).join('') : '<li class="empty">Belum ada setoran soal. Masukkan target harian pertamamu di atas!</li>';
 
-  // Admission Checklist
   $('#up-doc-list').innerHTML = docs.length ? docs.map(d =>
     '<li class="task' + (d.done ? ' done' : '') + '">' +
       '<button type="button" class="check" data-action="toggle-unidoc" data-id="' + esc(d.id) + '" aria-pressed="' + (d.done ? 'true' : 'false') + '">' + icon('check') + '</button>' +
@@ -1028,7 +1050,6 @@ function renderUniPath() {
     '</li>'
   ).join('') : '<li class="empty">Daftar berkas masih kosong. Klik "+ Muat Berkas Standar" di kanan atas atau tambahkan manual.</li>';
 
-  // Jurnal Refleksi
   $('#up-j-count').textContent = journals.length ? journals.length + ' catatan' : '';
   $('#up-j-list').innerHTML = journals.length ? journals.map(j =>
     '<li class="up-j-item">' +
@@ -1044,7 +1065,6 @@ function renderUniPath() {
     '</li>'
   ).join('') : '<li class="empty">Belum ada jurnal refleksi. Tuliskan perasaan dan evaluasi belajarmu hari ini!</li>';
 
-  // Milestone Achievements (Badges)
   const badges = [
     { ico: '🏕️', title: 'Langkah Pertama Petualang', desc: 'Mencatat progres soal atau jurnal refleksi pertama kali.', ok: logs.length > 0 || journals.length > 0 },
     { ico: '⚜️', title: 'Bantara Ujian Lulus!', desc: 'Menuntaskan minimal 5 dokumen di Admission Checklist.', ok: docDone >= 5 || (docs.length > 0 && docDone === docs.length) },
@@ -1068,11 +1088,7 @@ function renderUniPath() {
 }
 
 function renderAll() {
-  renderFinance();
-  renderTasks();
-  renderGoals();
-  renderRuns();
-  renderUniPath();
+  renderFinance(); renderTasks(); renderGoals(); renderRuns(); renderUniPath();
 }
 
 function fill(select, items) {
@@ -1178,7 +1194,6 @@ async function addRun() {
   } catch (e) { toast('Error saving to cloud', 'error'); }
 }
 
-/* ---------- UniPath Form Actions ---------- */
 async function saveUniConfig() {
   if (!$('#up-cfg-form').reportValidity()) return;
   const existing = state.unipath.find(x => x.kind === 'config');
@@ -1211,10 +1226,7 @@ async function addUniLog() {
       kind: 'log',
       date: $('#up-log-date').value || todayStr(),
       subject: $('#up-log-sub').value,
-      target,
-      doneCount,
-      debtBefore: debt,
-      debtAfter,
+      target, doneCount, debtBefore: debt, debtAfter,
       ts: Date.now()
     });
     $('#up-log-target').value = '';
@@ -1229,11 +1241,7 @@ async function addUniDoc() {
   if (!title) return;
   try {
     await addDoc(collection(db, "unipath"), {
-      kind: 'doc',
-      title,
-      category: $('#up-doc-cat').value,
-      done: false,
-      ts: Date.now()
+      kind: 'doc', title, category: $('#up-doc-cat').value, done: false, ts: Date.now()
     });
     $('#up-doc-title').value = '';
     toast('Dokumen ditambahkan ke checklist!');
@@ -1247,11 +1255,7 @@ async function seedUniDocs() {
   try {
     for (const item of toAdd) {
       await addDoc(collection(db, "unipath"), {
-        kind: 'doc',
-        title: item.title,
-        category: item.category,
-        done: false,
-        ts: Date.now()
+        kind: 'doc', title: item.title, category: item.category, done: false, ts: Date.now()
       });
     }
     toast('Berkas standar berhasil dimuat!');
@@ -1265,15 +1269,10 @@ async function addUniJournal() {
   if (!obstacle || !reflection) return;
   try {
     await addDoc(collection(db, "unipath"), {
-      kind: 'journal',
-      date: $('#up-j-date').value || todayStr(),
-      mood: $('#up-j-mood').value,
-      obstacle,
-      reflection,
-      ts: Date.now()
+      kind: 'journal', date: $('#up-j-date').value || todayStr(), mood: $('#up-j-mood').value,
+      obstacle, reflection, ts: Date.now()
     });
-    $('#up-j-obs').value = '';
-    $('#up-j-ref').value = '';
+    $('#up-j-obs').value = ''; $('#up-j-ref').value = '';
     toast('Jurnal refleksi berhasil disimpan!');
   } catch (e) { toast('Gagal menyimpan jurnal', 'error'); }
 }
@@ -1368,26 +1367,15 @@ function init() {
   });
 
   setTab(state.tab);
-  
-  listenToTasks();
-  listenToFinance();
-  listenToGoals();
-  listenToRuns();
-  listenToUniPath();
+  listenToTasks(); listenToFinance(); listenToGoals(); listenToRuns(); listenToUniPath();
 
   $('#storage-note').textContent = 'Synced securely to Cloud.';
 
   // ---LOGIKA TOMBOL HOMEPAGE ---
   document.getElementById('btn-enter-dashboard').addEventListener('click', () => {
-
-    // 1. Sembunyikan Homepage
     document.getElementById('homepage').hidden = true;
-
-    // 2. Munculkan Sidebar dan Konten (Menggunakan querySelector agar kebal salah ketik ID)
     document.querySelector('.sidebar').hidden = false;
     document.querySelector('.content').hidden = false;
-
-    // 3. Render isi dasbor
     setTab(state.tab || 'finance');
   });
 }
