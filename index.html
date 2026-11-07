@@ -238,6 +238,19 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
 </style>
 </head>
 <body>
+<!-- LAYAR GEMBOK TRACKSITE -->
+    <div id="login-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background: linear-gradient(135deg, #F2F7FC 0%, #E8F2FC 100%); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <div style="background:#fff; padding:40px 30px; border-radius:16px; box-shadow:0 10px 30px rgba(36,90,150,0.15); width:90%; max-width:380px; text-align:center;">
+            <img src="logotracksite.svg" alt="Logo" style="width:70px; height:70px; margin-bottom:20px; border-radius:16px;">
+            <h2 style="margin-top:0; margin-bottom:24px; color:var(--ink);">Brankas TrackSite</h2>
+            
+            <input type="email" id="ts-email" placeholder="Email Rahasia" style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px; box-sizing:border-box; font-size:14px;">
+            <input type="password" id="ts-pass" placeholder="Password" style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ccc; border-radius:8px; box-sizing:border-box; font-size:14px;">
+            
+            <button id="btn-ts-login" style="width:100%; padding:14px; background:var(--accent); color:white; border:none; border-radius:8px; font-weight:bold; font-size:15px; cursor:pointer; box-shadow: 0 4px 10px rgba(36,90,150,0.3);">Buka Brankas</button>
+            <p id="ts-login-error" style="color:#ea4335; font-size:13px; display:none; margin-top:15px; font-weight:600;">Login gagal. Periksa kembali!</p>
+        </div>
+    </div>
 <div class="app">
   <!-- HOMEPAGE SECTION -->
     <section id="homepage" style="grid-column: 1 / -1; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; text-align:center; padding: 24px; background: linear-gradient(135deg, #F2F7FC 0%, #E8F2FC 100%);">
@@ -567,6 +580,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBm2qs6uhhG7s3tfnUqrVDK2bXbXj7FeEY",
@@ -579,6 +593,40 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+const auth = getAuth(app);
+
+// 1. Pantau Status Login (Otomatis menyembunyikan layar login jika sukses)
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // Jika sudah login, singkirkan layar penutup
+        document.getElementById('login-overlay').style.display = 'none';
+        
+        // (Pastikan fungsi pemanggil database Anda seperti listenToFinance(), dll tetap berjalan di bawah sini seperti biasa)
+    } else {
+        // Jika belum login / di-logout, paksa munculkan layar penutup
+        document.getElementById('login-overlay').style.display = 'flex';
+    }
+});
+
+// 2. Aksi Tombol Login
+document.getElementById('btn-ts-login').addEventListener('click', () => {
+    const email = document.getElementById('ts-email').value;
+    const pass = document.getElementById('ts-pass').value;
+    
+    // Ubah teks tombol saat loading
+    document.getElementById('btn-ts-login').innerText = "Membuka...";
+    
+    signInWithEmailAndPassword(auth, email, pass)
+        .then((userCredential) => {
+            document.getElementById('ts-login-error').style.display = 'none';
+            document.getElementById('btn-ts-login').innerText = "Buka Brankas";
+        })
+        .catch((error) => {
+            document.getElementById('ts-login-error').style.display = 'block';
+            document.getElementById('btn-ts-login').innerText = "Buka Brankas";
+        });
+});
 
 const TABS = ['finance', 'tasks', 'goals', 'runs', 'unipath'];
 const TAB_TITLES = {
