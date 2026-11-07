@@ -615,7 +615,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBm2qs6uhhG7s3tfnUqrVDK2bXbXj7FeEY",
@@ -630,37 +630,60 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// 1. Pantau Status Login Otomatis
+let listenersStarted = false;
+
+// 1. Pantau Status Login Otomatis & Jalankan Database Hanya Saat Login Sukses
 onAuthStateChanged(auth, (user) => {
     if (user) {
         document.getElementById('login-overlay').style.display = 'none';
+        if (!listenersStarted) {
+            listenersStarted = true;
+            listenToTasks(); 
+            listenToFinance(); 
+            listenToGoals(); 
+            listenToRuns(); 
+            listenToUniPath();
+        }
     } else {
         document.getElementById('login-overlay').style.display = 'flex';
     }
 });
 
-// 2. Fungsi Klik Antibadai (Diekspor ke window)
-window.prosesLoginMaster = function() {
-    const email = document.getElementById('ts-email').value;
+// 2. Fungsi Login (Terhubung langsung ke tombol & tombol Enter)
+async function prosesLoginMaster() {
+    const email = document.getElementById('ts-email').value.trim();
     const pass = document.getElementById('ts-pass').value;
     const btn = document.getElementById('btn-ts-login');
-    
-    // Efek loading
+    const errEl = document.getElementById('ts-login-error');
+
+    if (!email || !pass) {
+        errEl.innerText = "Harap isi Email dan Kata Sandi terlebih dahulu!";
+        errEl.style.display = 'block';
+        return;
+    }
+
+    errEl.style.display = 'none';
     btn.innerText = "Memverifikasi Otoritas...";
     btn.style.background = "#0369a1";
-    
-    signInWithEmailAndPassword(auth, email, pass)
-        .then((userCredential) => {
-            document.getElementById('ts-login-error').style.display = 'none';
-            btn.innerText = "Akses Diberikan";
-        })
-        .catch((error) => {
-            document.getElementById('ts-login-error').style.display = 'block';
-            btn.innerText = "Otorisasi Akses";
-            btn.style.background = "#0284c7";
-            console.error(error);
-        });
-};
+
+    try {
+        await signInWithEmailAndPassword(auth, email, pass);
+        btn.innerText = "Akses Diberikan!";
+        btn.style.background = "#0f9d58";
+    } catch (error) {
+        errEl.style.display = 'block';
+        errEl.innerText = "Gagal (" + error.code + "): Periksa kembali email/sandi atau pengaturan Auth Firebase.";
+        btn.innerText = "Otorisasi Akses";
+        btn.style.background = "#0284c7";
+        console.error("Detail Error Login:", error);
+    }
+}
+
+window.prosesLoginMaster = prosesLoginMaster;
+document.getElementById('btn-ts-login').addEventListener('click', prosesLoginMaster);
+document.getElementById('ts-pass').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') prosesLoginMaster();
+});
 
 const TABS = ['finance', 'tasks', 'goals', 'runs', 'unipath'];
 const TAB_TITLES = { finance: 'Finance Track', tasks: 'Task Track', goals: 'Goal Track', runs: 'Daily Runn', unipath: 'UniPath' };
@@ -1367,7 +1390,6 @@ function init() {
   });
 
   setTab(state.tab);
-  listenToTasks(); listenToFinance(); listenToGoals(); listenToRuns(); listenToUniPath();
 
   $('#storage-note').textContent = 'Synced securely to Cloud.';
 
