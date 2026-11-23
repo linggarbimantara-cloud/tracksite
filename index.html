@@ -163,6 +163,75 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
 .run dt{font-size:12.5px;color:var(--muted)}
 .run dd{font-weight:600}
 
+
+/* ---------- Task: view switcher, status pills, list view, smart deadline ---------- */
+.head-split{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px 20px}
+.head-tools{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.view-switch{display:inline-flex;gap:4px;padding:4px;background:var(--sky-100);border:1px solid var(--sky-200);border-radius:12px}
+.view-switch button{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 12px;border:0;border-radius:9px;background:transparent;color:var(--muted);font-size:13.5px;font-weight:600;cursor:pointer;transition:background-color .15s,color .15s}
+.view-switch button:hover{color:var(--accent-strong)}
+.view-switch button[aria-pressed="true"]{background:#fff;color:var(--accent-strong);box-shadow:0 1px 3px rgba(36,90,150,.2)}
+.view-switch .ico svg{width:16px;height:16px}
+.tool-toggle{min-height:34px;padding:0 12px;border:1px solid var(--line-strong);border-radius:10px;background:#fff;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;transition:background-color .15s,color .15s,border-color .15s}
+.tool-toggle:hover{background:var(--accent-soft);color:var(--accent-strong)}
+.tool-toggle[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-strong)}
+
+.spill{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:none;min-width:108px;padding:4px 11px;border:1px solid transparent;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.04em;white-space:nowrap;cursor:pointer;transition:background-color .15s,border-color .15s,color .15s}
+.spill svg{width:12px;height:12px;stroke-width:3}
+.spill-dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.spill.s-todo{background:#EEF2F6;border-color:#D5DDE6;color:#566C84}
+.spill.s-todo .spill-dot{background:transparent;box-shadow:inset 0 0 0 1.5px currentColor}
+.spill.s-todo:hover{background:#E2E8EF}
+.spill.s-prog{background:#2563EB;color:#fff}
+.spill.s-prog:hover{background:#1D4ED8}
+.spill.s-done{background:var(--pos-soft);border-color:#B8E6D4;color:var(--pos)}
+.spill.s-done:hover{background:#CDEEDF}
+
+.dl{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:500;white-space:nowrap}
+.dl svg{width:14px;height:14px}
+.dl-late{color:var(--neg);font-weight:600}
+.dl-today{color:var(--warn);font-weight:600}
+.dl-future,.dl-done,.dl-none{color:var(--muted)}
+
+.trow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:start;gap:10px;margin-bottom:8px;padding:10px 6px 10px 12px;background:#fff;border:1px solid var(--line);border-radius:var(--r-item)}
+.trow .spill{margin-top:1px}
+.is-done .task-title{color:var(--muted);text-decoration:line-through}
+.trow.is-done .trow-main{opacity:.7}
+
+.sgroup{margin-top:22px}
+.status-list{margin-top:6px}
+.sg-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding:0;border:0;background:transparent;text-align:left}
+button.sg-head{width:auto;cursor:pointer}
+.sg-badge{padding:4px 11px;border-radius:999px;font-size:11.5px;font-weight:700;letter-spacing:.04em}
+.sg-badge.s-prog{background:#2563EB;color:#fff}
+.sg-badge.s-todo{background:#EEF2F6;color:#566C84}
+.sg-badge.s-done{background:var(--pos-soft);color:var(--pos)}
+.sg-chev{display:grid;place-items:center;color:var(--muted);transition:transform .15s}
+.sg-chev svg{width:16px;height:16px}
+.sg-head[aria-expanded="false"] .sg-chev{transform:rotate(-90deg)}
+.sg-body{background:#fff;border:1px solid var(--line);border-radius:var(--r-panel);box-shadow:var(--shadow);padding:2px 16px}
+.sg-body .empty{padding:14px 0}
+.lrow{display:grid;grid-template-columns:auto minmax(0,1fr) 132px 128px auto;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line)}
+.lrow:first-child{border-top:0}
+.lrow .task-title{font-weight:500;overflow-wrap:anywhere}
+.lrow-meta{display:contents}
+.qbadge{justify-self:start;max-width:100%;padding:3px 10px;border-radius:999px;background:var(--qbg);color:var(--qink);font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lrow .dl{justify-self:start}
+.lrow.is-done .qbadge,.lrow.is-done .dl{opacity:.65}
+@media (max-width:720px){
+  .lrow{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"pill title del" ". meta meta";row-gap:6px}
+  .lrow>.spill{grid-area:pill}
+  .lrow>.task-title{grid-area:title}
+  .lrow>.icon-btn{grid-area:del}
+  .lrow-meta{grid-area:meta;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+}
+@media (max-width:560px){
+  .trow{grid-template-columns:minmax(0,1fr) auto}
+  .trow-main{grid-column:1;grid-row:1}
+  .trow>.icon-btn{grid-column:2;grid-row:1}
+  .trow>.spill{grid-column:1;grid-row:2;justify-self:start;min-width:96px}
+}
+
 /* ---------- UniPath Module ---------- */
 .up-map{background:linear-gradient(135deg,#1E4E8C 0%,#2F6FB5 60%,#4D8FD6 100%);color:#fff;border:0;margin-bottom:20px;position:relative;overflow:hidden}
 .up-map-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px}
@@ -270,7 +339,7 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
             </button>
         </div>
         
-        <button onclick="window.prosesLoginMaster()" id="btn-ts-login" style="width: 100%; padding: 14px; background: #0284c7; color: white; border: none; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);">Otorisasi Akses</button>
+        <button type="button" id="btn-ts-login" style="width: 100%; padding: 14px; background: #0284c7; color: white; border: none; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);">Otorisasi Akses</button>
         
         <p id="ts-login-error" style="color: #f87171; font-size: 13px; display: none; margin-top: 16px; font-weight: 500;">Akses Ditolak: Kredensial tidak valid.</p>
     </div>
@@ -310,20 +379,20 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
   <span>TrackSite</span>
 </div>
     <nav class="nav" aria-label="Modules">
-      <button type="button" data-tab="finance"><span class="ico" data-icon="cash"></span><span>Finance Track</span></button>
-      <button type="button" data-tab="tasks"><span class="ico" data-icon="grid"></span><span>Task Track</span></button>
-      <button type="button" data-tab="goals"><span class="ico" data-icon="target"></span><span>Goal Track</span></button>
-      <button type="button" data-tab="runs"><span class="ico" data-icon="route"></span><span>Daily Runn</span></button>
+      <button type="button" data-tab="finance"><span class="ico" data-icon="cash"></span><span>Finance</span></button>
+      <button type="button" data-tab="tasks"><span class="ico" data-icon="grid"></span><span>Task</span></button>
+      <button type="button" data-tab="goals"><span class="ico" data-icon="target"></span><span>Goal</span></button>
+      <button type="button" data-tab="runs"><span class="ico" data-icon="route"></span><span>Daily Run</span></button>
       <button type="button" data-tab="unipath"><span class="ico" data-icon="compass"></span><span>UniPath</span></button>
     </nav>
     <p class="side-foot" id="storage-note">Saved in this browser.</p>
   </aside>
 
   <main class="content" id="app-main" hidden>
-    <!-- Finance Track -->
+    <!-- Finance -->
     <section class="module" id="tab-finance" aria-labelledby="h-finance">
       <header class="module-head">
-        <h1 id="h-finance">Finance Track</h1>
+        <h1 id="h-finance">Finance</h1>
         <p>Cash flow across your accounts.</p>
       </header>
       <div class="summary">
@@ -364,11 +433,20 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
       </div>
     </section>
 
-    <!-- Task Track -->
+    <!-- Task -->
     <section class="module" id="tab-tasks" aria-labelledby="h-tasks" hidden>
-      <header class="module-head">
-        <h1 id="h-tasks">Task Track</h1>
-        <p>Plan your outside commitments by urgency and importance.</p>
+      <header class="module-head head-split">
+        <div>
+          <h1 id="h-tasks">Task</h1>
+          <p>Plan your outside commitments by urgency and importance.</p>
+        </div>
+        <div class="head-tools">
+          <button type="button" class="tool-toggle" id="t-show-done" data-action="toggle-show-done" aria-pressed="false" hidden>Show completed (0)</button>
+          <div class="view-switch" id="t-view-switch" role="group" aria-label="Task view">
+            <button type="button" data-action="set-task-view" data-view="matrix" aria-pressed="true"><span class="ico" data-icon="grid"></span><span>Matrix</span></button>
+            <button type="button" data-action="set-task-view" data-view="list" aria-pressed="false"><span class="ico" data-icon="list"></span><span>Status List</span></button>
+          </div>
+        </div>
       </header>
       <form class="panel form-grid f-task" id="t-form">
         <div class="field"><label for="t-title">Task name</label><input id="t-title" type="text" maxlength="120" placeholder="What needs to be done?" autocomplete="off" required></div>
@@ -377,12 +455,13 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
         <button type="button" class="btn" data-submit>Add task</button>
       </form>
       <div class="matrix" id="t-matrix"></div>
+      <div class="status-list" id="t-list" hidden></div>
     </section>
 
-    <!-- Goal Track -->
+    <!-- Goal -->
     <section class="module" id="tab-goals" aria-labelledby="h-goals" hidden>
       <header class="module-head">
-        <h1 id="h-goals">Goal Track</h1>
+        <h1 id="h-goals">Goal</h1>
         <p>Short-term and long-term goals in one place.</p>
       </header>
       <form class="panel form-grid f-goal" id="g-form">
@@ -397,10 +476,10 @@ select{appearance:none;-webkit-appearance:none;padding-right:34px;background-ima
       <div id="g-groups"></div>
     </section>
 
-    <!-- Daily Runn -->
+    <!-- Daily Run -->
     <section class="module" id="tab-runs" aria-labelledby="h-runs" hidden>
       <header class="module-head">
-        <h1 id="h-runs">Daily Runn</h1>
+        <h1 id="h-runs">Daily Run</h1>
         <p>Log each run and track your pace.</p>
       </header>
       <div class="run-stats" id="r-stats"></div>
@@ -686,7 +765,7 @@ document.getElementById('ts-pass').addEventListener('keydown', (e) => {
 });
 
 const TABS = ['finance', 'tasks', 'goals', 'runs', 'unipath'];
-const TAB_TITLES = { finance: 'Finance Track', tasks: 'Task Track', goals: 'Goal Track', runs: 'Daily Runn', unipath: 'UniPath' };
+const TAB_TITLES = { finance: 'Finance', tasks: 'Task', goals: 'Goal', runs: 'Daily Run', unipath: 'UniPath' };
 const ACCOUNTS = ['Cash', 'Bank BRI', 'Bank Jatim', 'SeaBank', 'GoPay'];
 const CATEGORIES = {
   income: ['Allowance', 'Salary', 'Freelance', 'Gift', 'Refund', 'Opening balance', 'Other'],
@@ -694,11 +773,38 @@ const CATEGORIES = {
   transfer: ['Top-up', 'Withdrawal', 'Savings', 'Other']
 };
 const QUADS = [
-  { id: 'q1', title: 'Urgent & Important', hint: 'Do these first', bar: '#2F6FB5', tint: '#E6F0FA' },
-  { id: 'q2', title: 'Important & Not Urgent', hint: 'Schedule time for these', bar: '#5B9BD8', tint: '#EDF5FC' },
-  { id: 'q3', title: 'Urgent & Not Important', hint: 'Keep these short or hand them off', bar: '#8DBBE6', tint: '#F3F8FD' },
-  { id: 'q4', title: 'Neither', hint: 'Drop or postpone', bar: '#B7C9DA', tint: '#F7F9FB' }
+  { id: 'q1', title: 'Urgent & Important', short: 'Q1 · Do first', hint: 'Do these first', bar: '#2F6FB5', tint: '#E6F0FA', bg: '#FBE8E7', ink: '#A12E28' },
+  { id: 'q2', title: 'Important & Not Urgent', short: 'Q2 · Schedule', hint: 'Schedule time for these', bar: '#5B9BD8', tint: '#EDF5FC', bg: '#E3EEF9', ink: '#245A96' },
+  { id: 'q3', title: 'Urgent & Not Important', short: 'Q3 · Delegate', hint: 'Keep these short or hand them off', bar: '#8DBBE6', tint: '#F3F8FD', bg: '#FEF3C7', ink: '#8A5208' },
+  { id: 'q4', title: 'Neither', short: 'Q4 · Drop', hint: 'Drop or postpone', bar: '#B7C9DA', tint: '#F7F9FB', bg: '#EEF2F6', ink: '#566C84' }
 ];
+const QUAD_ALIASES = { urgent_important: 'q1', not_urgent_important: 'q2', urgent_not_important: 'q3', neither: 'q4' };
+const STATUSES = ['TO_DO', 'IN_PROGRESS', 'COMPLETE'];
+const STATUS_META = {
+  TO_DO: { label: 'TO DO', cls: 's-todo', rank: 1 },
+  IN_PROGRESS: { label: 'IN PROGRESS', cls: 's-prog', rank: 0 },
+  COMPLETE: { label: 'COMPLETE', cls: 's-done', rank: 2 }
+};
+const NEXT_STATUS = { TO_DO: 'IN_PROGRESS', IN_PROGRESS: 'COMPLETE', COMPLETE: 'TO_DO' };
+
+// Migrasi fallback: dokumen lama (tanpa status / quad format lama) tetap terbaca.
+function normTask(t) {
+  const status = STATUSES.includes(t.status) ? t.status : (t.done ? 'COMPLETE' : 'TO_DO');
+  const raw = String(t.quad || '').toLowerCase();
+  const quad = QUADS.some(q => q.id === raw) ? raw : (QUAD_ALIASES[raw] || 'q4');
+  return Object.assign({}, t, { status: status, quad: quad, done: status === 'COMPLETE' });
+}
+
+const PREF_KEY = 'tracksite.taskPrefs';
+function loadTaskPrefs() {
+  try {
+    const p = JSON.parse(localStorage.getItem(PREF_KEY) || '{}');
+    return { view: p.view === 'list' ? 'list' : 'matrix', showCompleted: !!p.showCompleted, completeOpen: !!p.completeOpen };
+  } catch (e) { return { view: 'matrix', showCompleted: false, completeOpen: false }; }
+}
+function saveTaskPrefs() {
+  try { localStorage.setItem(PREF_KEY, JSON.stringify(state.taskPrefs)); } catch (e) {}
+}
 const TIMEFRAMES = ['Today', 'Tomorrow', '1 Week', '1 Month', 'Quarterly', 'Semester', '1 Year'];
 const DEFAULT_DOCS = [
   { title: 'Sertifikat Pramuka / Pelantikan Bantara Ambalan', category: 'Prestasi & Organisasi' },
@@ -720,6 +826,8 @@ const ICONS = {
   swap: '<path d="M4 8h15M15 4l4 4-4 4M20 16H5M9 12l-4 4 4 4"/>',
   x: '<path d="M6 6l12 12M18 6L6 18"/>',
   check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  list: '<path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>',
+  chev: '<path d="M6 9l6 6 6-6"/>',
   calendar: '<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/>'
 };
 
@@ -755,7 +863,8 @@ const parseClock = v => {
 
 const dn = x => (x && x.done ? 1 : 0);
 const sortByDate = (a, b) => String(b.date || '').localeCompare(String(a.date || '')) || (b.ts || 0) - (a.ts || 0);
-const taskSort = (a, b) => dn(a) - dn(b) || String(a.deadline || '9999-99-99').localeCompare(String(b.deadline || '9999-99-99')) || (a.ts || 0) - (b.ts || 0);
+const byDeadline = (a, b) => String(a.deadline || '9999-99-99').localeCompare(String(b.deadline || '9999-99-99')) || (a.ts || 0) - (b.ts || 0);
+const taskSort = (a, b) => STATUS_META[a.status].rank - STATUS_META[b.status].rank || byDeadline(a, b);
 const goalSort = (a, b) => dn(a) - dn(b) || (a.ts || 0) - (b.ts || 0);
 
 let state, paceManual = false, toastTimer;
@@ -763,7 +872,7 @@ let state, paceManual = false, toastTimer;
 function listenToTasks() {
   onSnapshot(collection(db, "tasks"), (snapshot) => {
     state.tasks = [];
-    snapshot.forEach((doc) => state.tasks.push({ id: doc.id, ...doc.data() }));
+    snapshot.forEach((doc) => state.tasks.push(normTask({ id: doc.id, ...doc.data() })));
     renderTasks();
   });
 }
@@ -873,31 +982,88 @@ function renderFinance() {
     : '<li class="empty">No transactions yet. Add your first one with the form.</li>';
 }
 
+const shortDate = d => d.toLocaleDateString('en-GB', d.getFullYear() === new Date().getFullYear()
+  ? { day: 'numeric', month: 'short' } : { day: 'numeric', month: 'short', year: 'numeric' });
+
+// Smart Deadline Indicator (dipakai di Matrix View & Status List View)
+function deadlineHTML(t) {
+  if (!DATE_RE.test(t.deadline || '')) return '';
+  const n = daysFrom(t.deadline);
+  let cls, text;
+  if (t.status === 'COMPLETE') { cls = 'dl-done'; text = shortDate(toDate(t.deadline)); }
+  else if (n < 0) { cls = 'dl-late'; text = n === -1 ? 'Yesterday' : (-n) + ' days overdue'; }
+  else if (n === 0) { cls = 'dl-today'; text = 'Today'; }
+  else { cls = 'dl-future'; text = n === 1 ? 'Tomorrow' : shortDate(toDate(t.deadline)); }
+  return '<span class="dl ' + cls + '" title="' + esc(fmtDate(t.deadline)) + '">' + icon('calendar') + '<span>' + esc(text) + '</span></span>';
+}
+
+function statusPill(t) {
+  const m = STATUS_META[t.status], next = STATUS_META[NEXT_STATUS[t.status]];
+  return '<button type="button" class="spill ' + m.cls + '" data-action="cycle-task" data-id="' + esc(t.id) + '" title="Status: ' + m.label + ' (click to set ' + next.label + ')" aria-label="Status: ' + m.label + '. Click to change to ' + next.label + '">' +
+    (t.status === 'COMPLETE' ? icon('check') : '<i class="spill-dot"></i>') + '<span>' + m.label + '</span></button>';
+}
+
+const delTaskBtn = t => '<button type="button" class="icon-btn danger" data-action="del-task" data-id="' + esc(t.id) + '" aria-label="Delete task">' + icon('x') + '</button>';
+
 function taskRow(t) {
-  let due = '';
-  if (DATE_RE.test(t.deadline || '')) {
-    const n = daysFrom(t.deadline);
-    const late = !t.done && n < 0;
-    let rel = '';
-    if (!t.done) rel = n < 0 ? (-n) + (n === -1 ? ' day overdue' : ' days overdue') : n === 0 ? 'Today' : n === 1 ? 'Tomorrow' : 'In ' + n + ' days';
-    due = '<div class="due' + (late ? ' late' : '') + '">' + icon('calendar') + '<span>' + fmtDate(t.deadline) + '</span>' + (rel ? '<span class="rel">' + rel + '</span>' : '') + '</div>';
-  }
-  return '<li class="task' + (t.done ? ' done' : '') + '">' +
-    '<button type="button" class="check" data-action="toggle-task" data-id="' + esc(t.id) + '" aria-pressed="' + (t.done ? 'true' : 'false') + '" aria-label="' + (t.done ? 'Reopen task' : 'Mark task as done') + '">' + icon('check') + '</button>' +
-    '<div><div class="task-title">' + esc(t.title) + '</div>' + due + '</div>' +
-    '<button type="button" class="icon-btn danger" data-action="del-task" data-id="' + esc(t.id) + '" aria-label="Delete task">' + icon('x') + '</button>' +
+  const dl = deadlineHTML(t);
+  return '<li class="trow' + (t.status === 'COMPLETE' ? ' is-done' : '') + '">' +
+    '<div class="trow-main"><div class="task-title">' + esc(t.title) + '</div>' + (dl ? '<div class="due">' + dl + '</div>' : '') + '</div>' +
+    statusPill(t) + delTaskBtn(t) +
   '</li>';
 }
 
-function renderTasks() {
+function listRow(t) {
+  const q = QUADS.find(x => x.id === t.quad) || QUADS[3];
+  return '<li class="lrow' + (t.status === 'COMPLETE' ? ' is-done' : '') + '">' +
+    statusPill(t) +
+    '<div class="task-title">' + esc(t.title) + '</div>' +
+    '<div class="lrow-meta"><span class="qbadge" style="--qbg:' + q.bg + ';--qink:' + q.ink + '" title="' + esc(q.title) + '">' + esc(q.short) + '</span>' +
+    (deadlineHTML(t) || '<span class="dl dl-none">No deadline</span>') + '</div>' +
+    delTaskBtn(t) +
+  '</li>';
+}
+
+function renderTaskMatrix() {
+  const showDone = state.taskPrefs.showCompleted;
   $('#t-matrix').innerHTML = QUADS.map(q => {
-    const items = state.tasks.filter(t => t.quad === q.id).sort(taskSort);
-    const open = items.filter(t => !t.done).length;
+    const all = state.tasks.filter(t => t.quad === q.id).sort(taskSort);
+    const active = all.filter(t => t.status !== 'COMPLETE').length;
+    const items = showDone ? all : all.filter(t => t.status !== 'COMPLETE');
+    const empty = all.length ? 'No active tasks here.' : 'No tasks yet. Add one above.';
     return '<section class="quad" style="--bar:' + q.bar + ';--tint:' + q.tint + '" aria-label="' + esc(q.title) + '">' +
-      '<header><div><h2>' + esc(q.title) + '</h2><p>' + esc(q.hint) + '</p></div><span class="count" title="Open tasks">' + open + '</span></header>' +
-      '<ul>' + (items.length ? items.map(taskRow).join('') : '<li class="empty">No tasks yet. Add one above.</li>') + '</ul>' +
+      '<header><div><h2>' + esc(q.title) + '</h2><p>' + esc(q.hint) + '</p></div><span class="count" title="Active tasks (To do + In progress)">' + active + '</span></header>' +
+      '<ul>' + (items.length ? items.map(taskRow).join('') : '<li class="empty">' + empty + '</li>') + '</ul>' +
     '</section>';
   }).join('');
+}
+
+function renderTaskList() {
+  const emptyText = { IN_PROGRESS: 'Nothing in progress.', TO_DO: 'Nothing to do. Add a task above.', COMPLETE: 'No completed tasks yet.' };
+  $('#t-list').innerHTML = STATUSES.slice().sort((a, b) => STATUS_META[a].rank - STATUS_META[b].rank).map(st => {
+    const m = STATUS_META[st];
+    const items = state.tasks.filter(t => t.status === st).sort(byDeadline);
+    const collapsible = st === 'COMPLETE';
+    const open = !collapsible || state.taskPrefs.completeOpen;
+    const inner = '<span class="sg-badge ' + m.cls + '">' + m.label + '</span><span class="count">' + items.length + '</span>';
+    const head = collapsible
+      ? '<button type="button" class="sg-head" data-action="toggle-complete-group" aria-expanded="' + open + '">' + inner + '<span class="sg-chev">' + icon('chev') + '</span></button>'
+      : '<div class="sg-head">' + inner + '</div>';
+    const body = open ? '<ul class="sg-body">' + (items.length ? items.map(listRow).join('') : '<li class="empty">' + emptyText[st] + '</li>') + '</ul>' : '';
+    return '<section class="sgroup" aria-label="' + m.label + '">' + head + body + '</section>';
+  }).join('');
+}
+
+function renderTasks() {
+  const p = state.taskPrefs, listMode = p.view === 'list';
+  $('#t-matrix').hidden = listMode;
+  $('#t-list').hidden = !listMode;
+  $$('#t-view-switch [data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === p.view ? 'true' : 'false'));
+  const tog = $('#t-show-done');
+  tog.hidden = listMode;
+  tog.setAttribute('aria-pressed', p.showCompleted ? 'true' : 'false');
+  tog.textContent = (p.showCompleted ? 'Hide' : 'Show') + ' completed (' + state.tasks.filter(t => t.status === 'COMPLETE').length + ')';
+  if (listMode) renderTaskList(); else renderTaskMatrix();
 }
 
 function goalCard(g) {
@@ -1164,6 +1330,7 @@ async function addTask() {
       title: title,
       deadline: $('#t-deadline').value,
       quad: $('#t-quad').value,
+      status: 'TO_DO',
       done: false,
       ts: Date.now()
     });
@@ -1310,7 +1477,7 @@ function bindForm(selector, handler) {
 }
 
 function init() {
-  state = { tab: 'finance', finance: [], tasks: [], goals: [], runs: [], unipath: [] };
+  state = { tab: 'finance', finance: [], tasks: [], goals: [], runs: [], unipath: [], taskPrefs: loadTaskPrefs() };
 
   $$('[data-icon]').forEach(el => { el.innerHTML = icon(el.dataset.icon); });
   fill($('#f-account'), ACCOUNTS);
@@ -1362,12 +1529,25 @@ function init() {
       else if (action === 'del-goal') { await deleteDoc(doc(db, "goals", id)); toast('Goal deleted'); } 
       else if (action === 'del-run') { await deleteDoc(doc(db, "runs", id)); toast('Run deleted'); } 
       else if (action === 'del-unipath') { await deleteDoc(doc(db, "unipath", id)); toast('Item UniPath dihapus'); }
-      else if (action === 'toggle-task') {
+      else if (action === 'cycle-task') {
         const item = state.tasks.find(x => x.id === id);
         if (item) {
-          await updateDoc(doc(db, "tasks", id), { done: !item.done });
-          toast(item.done ? 'Task reopened' : 'Task marked as done');
+          const next = NEXT_STATUS[item.status];
+          await updateDoc(doc(db, "tasks", id), { status: next, done: next === 'COMPLETE' });
+          toast('Status: ' + STATUS_META[next].label);
         }
+      }
+      else if (action === 'set-task-view') {
+        state.taskPrefs.view = el.dataset.view === 'list' ? 'list' : 'matrix';
+        saveTaskPrefs(); renderTasks();
+      }
+      else if (action === 'toggle-show-done') {
+        state.taskPrefs.showCompleted = !state.taskPrefs.showCompleted;
+        saveTaskPrefs(); renderTasks();
+      }
+      else if (action === 'toggle-complete-group') {
+        state.taskPrefs.completeOpen = !state.taskPrefs.completeOpen;
+        saveTaskPrefs(); renderTasks();
       }
       else if (action === 'toggle-goal') {
         const item = state.goals.find(x => x.id === id);
